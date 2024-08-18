@@ -22,7 +22,7 @@ import { UserInfo } from "@/models/User.model";
 import getBaseUserInfo from "@/api/user/getBaseUserInfo";
 
 interface AuthButtonWithDialogProps {
-  setUser?: Dispatch<SetStateAction<UserInfo | null>>;
+  setUser: Dispatch<SetStateAction<UserInfo | null>>;
 }
 const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
   const [_, setAuthIsPending] = useRecoilState<boolean>(authIsPendingState);
@@ -64,9 +64,7 @@ const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
     if (windowType === "signIn") await signIn(email, password, role);
     else await signUp(email, nickname, password, role);
 
-    if (setUser) {
-      setUser(await getBaseUserInfo());
-    }
+    setUser(await getBaseUserInfo());
   };
 
   return (

@@ -14,8 +14,6 @@ import { deleteCookie } from "cookies-next";
 import { UserInfo } from "@/models/User.model";
 import noAvatar from "public/noAvatar.png";
 import { GameWithServices } from "@/models/Game.model";
-import { useRecoilValue } from "recoil";
-import { authIsPendingState } from "@/storage/atoms";
 
 interface MobileNavbarProps {
   games: GameWithServices[];
@@ -105,7 +103,7 @@ const MobileNavbar = ({ games, user, setUser }: MobileNavbarProps) => {
                 <MenuWithButton logout={logout} />
               </div>
             ) : (
-              <AuthButtonWithDialog />
+              <AuthButtonWithDialog setUser={setUser} />
             )}
           </>
         )}

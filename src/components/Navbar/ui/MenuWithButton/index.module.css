@@ -1,0 +1,32 @@
+.trigger:focus {
+  outline: none;
+}
+.btn {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  margin-top: 0.5rem;
+}
+.content {
+  border-radius: 0.125rem;
+  border-width: 1px;
+  width: 12rem;
+  background-color: #ffffff;
+}
+.menuBtn {
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.25rem;
+  align-items: center;
+  cursor: pointer;
+}
+.menuBtn:hover {
+  background-color: rgb(229 229 229);
+}
+.menuBtn:focus {
+  outline: none;
+}
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: rgb(229 229 229);
+}

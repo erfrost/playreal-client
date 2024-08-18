@@ -1,0 +1,16 @@
+.boosterLink {
+  width: 100%;
+  border: 1px solid #00d409;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.boosterLink:hover {
+  background-color: rgb(248, 248, 248);
+}
+.boosterLinkText {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.58px;
+}

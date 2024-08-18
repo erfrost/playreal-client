@@ -1,0 +1,8 @@
+@media screen and (max-width: 1000px) {
+  .container div {
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}

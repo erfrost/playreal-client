@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.item,
+.separator,
+.activeItem {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  opacity: 0.6;
+  user-select: none;
+}
+.containerWhite .item,
+.containerWhite .separator,
+.containerWhite .activeItem {
+  color: white !important;
+}
+.link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.separator {
+  font-size: 20px;
+}
+.item:hover {
+  opacity: 1;
+}
+.activeItem {
+  opacity: 1;
+}

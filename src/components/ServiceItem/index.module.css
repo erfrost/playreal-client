@@ -1,0 +1,106 @@
+.container {
+  position: relative;
+  color: white !important;
+}
+.container:hover .background {
+  scale: 1.025;
+}
+.background {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+.content {
+  width: calc(100% - 40px);
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20.43px;
+}
+.params {
+  margin-left: 11px;
+  list-style: disc;
+}
+.paramsItem {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 18.4px;
+}
+.btn {
+  border-radius: 38px;
+  padding: 10px 15px 10px 15px;
+}
+
+@media screen and (max-width: 575px) {
+  .content {
+    gap: 10px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .paramsItem {
+    font-size: 10px;
+  }
+  .price {
+    font-size: 18px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .content {
+    gap: 20px;
+  }
+  .title {
+    font-size: 26px;
+  }
+  .paramsItem {
+    font-size: 14px;
+  }
+  .price {
+    font-size: 32px;
+  }
+  .btn {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .content {
+    gap: 15px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .paramsItem {
+    font-size: 12px;
+  }
+  .price {
+    font-size: 22px;
+  }
+  .btn {
+    font-size: 16px;
+  }
+}

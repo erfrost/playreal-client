@@ -1,0 +1,39 @@
+.container {
+  position: absolute;
+  top: 58px;
+  left: -60px;
+}
+.list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 0 20px 20px 0;
+  width: 260px;
+  background-color: white;
+  z-index: 3249239429;
+}
+
+@media screen and (max-width: 825px) {
+  .container {
+    top: 55px;
+    left: -10px;
+  }
+  .background {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 429348247274237432;
+  }
+}
+@media screen and (max-width: 435px) {
+  .container {
+    top: 45px;
+    left: -10px;
+  }
+}

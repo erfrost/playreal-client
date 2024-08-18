@@ -1,0 +1,80 @@
+.container {
+  overflow: hidden;
+  max-width: 2000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.background {
+  background-image: url("/background.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.title,
+.subtitle {
+  user-select: none;
+}
+.title {
+  margin-bottom: 1.25rem;
+  margin-top: 2.5rem;
+  max-width: 700px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.subtitle {
+  max-width: 440px;
+}
+.blockBlueContainer {
+  max-width: 95%;
+}
+.gamesContainer {
+  max-width: 95%;
+}
+.blockBlue {
+  user-select: none;
+}
+
+@media screen and (max-width: 1325px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 935px) {
+  .blockBlueContainer {
+    width: 75%;
+  }
+  .blockBlue {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .blockBlueItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 750px) {
+  .grid {
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+  }
+  .gamesTitle {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 56px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .blockBlueContainer {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .gamesTitle {
+    margin-bottom: 20px;
+  }
+}

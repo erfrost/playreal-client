@@ -1,0 +1,158 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+.rank {
+  position: absolute;
+  top: 0;
+  right: 0;
+  user-select: none;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+}
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  user-select: none;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.rate {
+  padding: 3px 8px 3px 8px;
+  border: 1px solid #f1c644;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+.rateText {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 9.2px;
+  opacity: 0.3;
+  user-select: none;
+}
+.game {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 9.2px;
+  opacity: 0.3;
+  user-select: none;
+}
+.infoRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.infoText {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 9.2px;
+  user-select: none;
+}
+.miniIcon {
+  opacity: 0.3;
+  user-select: none;
+}
+.name {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 13.8px;
+}
+.text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.58px;
+}
+.btn {
+  width: 55%;
+  border-radius: 113px;
+  padding: 15px 30px 15px 30px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 17.03px;
+}
+.star {
+  user-select: none;
+}
+
+@media screen and (max-width: 1550px) {
+  .btn {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1350px) {
+  .btn {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .btn {
+    width: 75%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .btn {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 725px) {
+  .btn {
+    width: 75%;
+  }
+}
+@media screen and (max-width: 725px) {
+  .text {
+    font-size: 13px;
+    line-height: normal;
+  }
+}
+@media screen and (max-width: 560px) {
+  .btn {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .text {
+    font-size: 15px;
+  }
+  .btn {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 350px) {
+  .btn {
+    width: 100%;
+  }
+}

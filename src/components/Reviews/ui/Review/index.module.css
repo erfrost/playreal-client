@@ -1,0 +1,11 @@
+@media screen and (max-width: 725px) {
+  .container {
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 660px) {
+  .text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+}

@@ -1,0 +1,37 @@
+.container {
+  width: 105%;
+  margin-left: -3%;
+  overflow: hidden;
+  transform: rotate(-4deg);
+}
+.row {
+  width: 200%;
+  animation: run 60s linear infinite;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+}
+.row span {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 25px;
+}
+@keyframes run {
+  0% {
+    transform: translate(0%);
+  }
+  100% {
+    transform: translate(-90%);
+  }
+}
+
+@media screen and (max-width: 725px) {
+  .row {
+    gap: 10px;
+  }
+  .row span {
+    gap: 10px;
+  }
+}

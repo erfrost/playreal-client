@@ -1,0 +1,50 @@
+.container {
+  min-width: 100%;
+  padding: 60px 75px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.homePageContainer {
+  max-width: 95% !important;
+  min-width: auto !important;
+  padding: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    margin-top: 50px !important;
+  }
+}
+@media screen and (max-width: 825px) {
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    font-size: 32px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    margin-top: 40px !important;
+    padding-top: 0 !important;
+  }
+  .title {
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 425px) {
+  .title {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .container .title {
+    font-size: 26px;
+    line-height: normal;
+  }
+}

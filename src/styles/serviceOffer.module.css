@@ -1,0 +1,200 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  width: 100%;
+  height: 357px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  padding: 25px 75px;
+}
+.title {
+  max-width: 65%;
+  font-size: 70px;
+  font-weight: 700;
+  line-height: 56.72px;
+  color: white;
+}
+.statsGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+}
+.statBtn {
+  padding: 3px 8px 3px 8px;
+  border: 1px solid #f1c644;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.statBtnText {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 19.5px;
+  color: white;
+}
+.content {
+  padding: 25px 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  color: #333333;
+  position: relative;
+}
+.info {
+  max-width: calc(100% - 425px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.h3 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 37.02px;
+}
+.h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20.43px;
+}
+.defaultText {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.58px;
+}
+.footerBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.h2 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 46.01px;
+}
+.boostersText {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.58px;
+}
+.boostersList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 25px;
+  grid-column-gap: 25px;
+}
+.servicesList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 25px;
+  grid-column-gap: 25px;
+}
+
+@media screen and (max-width: 1350px) {
+  .servicesList,
+  .boostersList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .header,
+  .content {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .title {
+    max-width: 55%;
+    font-size: 42px;
+    line-height: normal;
+  }
+}
+@media screen and (max-width: 1075px) {
+  .servicesList,
+  .boostersList {
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .info {
+    max-width: calc(100% - 350px);
+  }
+}
+@media screen and (max-width: 1000px) {
+  .servicesList,
+  .boostersList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 900px) {
+  .info {
+    max-width: calc(100% - 300px);
+  }
+}
+@media screen and (max-width: 825px) {
+  .header,
+  .content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .content {
+    gap: 50px;
+  }
+  .header {
+    height: auto;
+    padding-bottom: 50px;
+  }
+  .info {
+    max-width: none;
+    width: 100%;
+  }
+  .title {
+    max-width: 80%;
+    font-size: 34px;
+  }
+  .statsGroup {
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 625px) {
+  .header {
+    padding-bottom: 65px;
+    flex-direction: column-reverse;
+  }
+}
+@media screen and (max-width: 500px) {
+  .servicesList,
+  .boostersList {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 425px) {
+  .title {
+    font-size: 28px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .header {
+    padding-bottom: 50px;
+  }
+}

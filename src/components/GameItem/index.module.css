@@ -1,0 +1,42 @@
+.container {
+  transition: all 0.3s ease;
+}
+.container:hover {
+  background-color: rgb(234, 234, 234);
+}
+.image {
+  user-select: none;
+  transition: all 0.3s ease;
+}
+.container:hover .image {
+  scale: 1.05;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    height: auto;
+    padding: 50px;
+  }
+  .image {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .container {
+    height: auto;
+    padding: 25px;
+  }
+}
+@media screen and (max-width: 475px) {
+  .container {
+    padding: 20px;
+    border-radius: 25px;
+  }
+  .image {
+    width: 60%;
+  }
+  .title {
+    font-size: 16px;
+  }
+}

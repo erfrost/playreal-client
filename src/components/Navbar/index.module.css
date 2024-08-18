@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff;
+  max-width: 1800px;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.logo {
+  user-select: none;
+  cursor: pointer;
+}
+.catalogRelative {
+  position: relative;
+}
+.catalogBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 15px;
+  padding-right: 12px;
+}
+.profile {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.skeletons {
+  display: flex;
+  align-items: center;
+}
+.skeleton1 {
+  width: 6rem;
+  height: 0.75rem;
+}
+.skeleton2 {
+  margin-right: 0.75rem;
+  margin-left: 1rem;
+  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.skeleton3 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.userContainer {
+  display: flex;
+  align-items: center;
+}
+.nickname {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: rgb(2, 8, 23);
+}
+.avatar {
+  margin-right: 0.75rem;
+  margin-left: 1rem;
+  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media screen and (max-width: 925px) {
+  .left {
+    gap: 25px;
+  }
+}

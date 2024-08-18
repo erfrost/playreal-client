@@ -11,8 +11,6 @@ const updateToken = async (refreshToken: string) => {
 
     const tokens = res.data;
 
-    console.log(tokens);
-
     setCookie("access_token", tokens.access_token);
     setCookie("refresh_token", tokens.refresh_token);
 

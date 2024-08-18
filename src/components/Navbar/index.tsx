@@ -36,7 +36,7 @@ const Navbar = () => {
       setGames(await getGamesWithServices());
     })();
   }, []);
-  console.log(authIsPending);
+
   useEffect(() => {
     (async () => {
       if (authIsPending) return;

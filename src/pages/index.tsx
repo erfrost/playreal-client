@@ -93,17 +93,19 @@ const Home = ({ games, error }: IndexProps) => {
 
 export default Home;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const res: AxiosResponse = await axiosInstance.get("games/all");
+
+    console.log(res.data.games);
 
     return {
       props: {
         games: res.data.games,
-        revalidate: 60,
       },
     };
   } catch (error: any) {
+    console.log(error);
     return {
       props: {
         error:

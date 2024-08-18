@@ -97,15 +97,12 @@ export const getServerSideProps = async () => {
   try {
     const res: AxiosResponse = await axiosInstance.get("games/all");
 
-    console.log(res.data.games);
-
     return {
       props: {
         games: res.data.games,
       },
     };
   } catch (error: any) {
-    console.log(error);
     return {
       props: {
         error:

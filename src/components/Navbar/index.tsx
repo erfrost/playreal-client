@@ -39,7 +39,6 @@ const Navbar = () => {
 
   useEffect(() => {
     (async () => {
-      if (authIsPending) return;
       setUser(await getBaseUserInfo());
     })();
   }, [authIsPending]);
@@ -128,7 +127,7 @@ const Navbar = () => {
                 <MenuWithButton logout={logout} />
               </div>
             ) : (
-              <AuthButtonWithDialog />
+              <AuthButtonWithDialog setUser={setUser} />
             )}
           </>
         )}

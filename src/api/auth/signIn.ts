@@ -19,8 +19,6 @@ const signIn = async (
     setCookie("access_token", data.access_token);
     setCookie("refresh_token", data.refresh_token);
     setCookie("user_id", data.userId);
-
-    window.location.reload();
   } catch (error: any) {
     console.log(error);
     toastError(

@@ -26,7 +26,6 @@ const MobileNavbar = ({ games, user, setUser }: MobileNavbarProps) => {
   const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
   const [isOpenCatalog, setIsOpenCatalog] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
-  const authIsPending = useRecoilValue(authIsPendingState);
 
   useEffect(() => {
     setIsLoading(false);

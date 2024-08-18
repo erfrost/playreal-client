@@ -1,7 +1,13 @@
 import PrimaryBtn from "@/components/PrimaryBtn";
 import Input from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./index.module.css";
 import Dialog from "@/components/Dialog";
 import axiosInstance from "axios.config";
@@ -11,8 +17,15 @@ import signUp from "@/api/auth/signUp";
 import signIn from "@/api/auth/signIn";
 import { useRecoilState } from "recoil";
 import { setCookie } from "cookies-next";
+import { authIsPendingState } from "@/storage/atoms";
+import { UserInfo } from "@/models/User.model";
+import getBaseUserInfo from "@/api/user/getBaseUserInfo";
 
-const AuthButtonWithDialog = () => {
+interface AuthButtonWithDialogProps {
+  setUser?: Dispatch<SetStateAction<UserInfo | null>>;
+}
+const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
+  const [_, setAuthIsPending] = useRecoilState<boolean>(authIsPendingState);
   const [windowType, setWindowType] = useState<string>("signIn");
   const [email, setEmail] = useState<string>("");
   const [nickname, setNickname] = useState<string>("");
@@ -47,9 +60,13 @@ const AuthButtonWithDialog = () => {
     setPassword("");
   }, [windowType]);
 
-  const onSubmit = () => {
-    if (windowType === "signIn") signIn(email, password, role);
-    else signUp(email, nickname, password, role);
+  const onSubmit = async () => {
+    if (windowType === "signIn") await signIn(email, password, role);
+    else await signUp(email, nickname, password, role);
+
+    if (setUser) {
+      setUser(await getBaseUserInfo());
+    }
   };
 
   return (

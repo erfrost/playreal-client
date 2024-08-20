@@ -8,6 +8,7 @@ import { AxiosResponse } from "axios";
 import axiosInstance from "axios.config";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useEffect } from "react";
+import noAvatar from "public/noAvatar.png";
 
 interface ProfileProps {
   user: User | undefined;
@@ -39,7 +40,7 @@ const Profile = ({ user, error }: ProfileProps) => {
             <div className={styles.header}>
               <div className={styles.info}>
                 <ImageNotDraggable
-                  src={user.avatar_url}
+                  src={user.avatar_url || noAvatar}
                   width={100}
                   height={100}
                   alt="avatar"

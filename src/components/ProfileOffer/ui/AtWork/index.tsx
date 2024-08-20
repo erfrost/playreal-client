@@ -6,7 +6,7 @@ const AtWork = () => {
   return (
     <div className={styles.container}>
       <span className={styles.text}>At work</span>
-      <ImageNotDraggable src={icon} alt="icon" />
+      <ImageNotDraggable src={icon} alt="icon" className={styles.icon} />
     </div>
   );
 };

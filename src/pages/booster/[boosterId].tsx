@@ -176,7 +176,7 @@ const Booster = ({ user, error }: BoosterProps) => {
 
 export const getStaticPaths = async () => {
   try {
-    const res = await axiosInstance.get("/user/boosters/all");
+    const res = await axiosInstance.get("user/boosters/all");
 
     return { paths: res.data.ids, fallback: true };
   } catch (error) {

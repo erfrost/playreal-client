@@ -11,3 +11,20 @@
   line-height: 22.58px;
   color: #1aba00;
 }
+
+@media screen and (max-width: 650px) {
+  .container {
+    gap: 5px;
+  }
+  .text {
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .text {
+    font-size: 11px;
+  }
+  .icon {
+    display: none;
+  }
+}

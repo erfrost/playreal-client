@@ -6,7 +6,7 @@ const Already = () => {
   return (
     <div className={styles.container}>
       <span className={styles.text}>Already</span>
-      <ImageNotDraggable src={icon} alt="icon" />
+      <ImageNotDraggable src={icon} alt="icon" className={styles.icon} />
     </div>
   );
 };

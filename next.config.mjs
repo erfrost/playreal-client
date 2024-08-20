@@ -4,7 +4,7 @@ const nextConfig = {
     domains: [
       "lh3.googleusercontent.com",
       "cdn.discordapp.com",
-      "147.45.155.240",
+      "147.45.168.75",
     ],
     remotePatterns: [
       {

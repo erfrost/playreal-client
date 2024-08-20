@@ -6,7 +6,7 @@ const Pending = () => {
   return (
     <div className={styles.container}>
       <span className={styles.text}>Pending</span>
-      <ImageNotDraggable src={icon} alt="icon" />
+      <ImageNotDraggable src={icon} alt="icon" className={styles.icon} />
     </div>
   );
 };

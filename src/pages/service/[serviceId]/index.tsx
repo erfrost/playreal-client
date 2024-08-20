@@ -130,7 +130,7 @@ const ServiceOffer = ({
 
 export const getStaticPaths = async () => {
   try {
-    const response = await axiosInstance.get("/services/all");
+    const response = await axiosInstance.get("services/all");
 
     const paths = response.data.services.map((service: { _id: string }) => ({
       params: { serviceId: service._id },
@@ -164,7 +164,7 @@ export const getStaticProps = async ({ params }) => {
     );
 
     const additionalServices: AxiosResponse = await axiosInstance.get(
-      `/services/by_gameId/additional/${gameId}?currentServiceId=${service._id}`
+      `services/by_gameId/additional/${gameId}?currentServiceId=${service._id}`
     );
 
     return {

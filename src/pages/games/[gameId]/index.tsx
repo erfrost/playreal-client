@@ -56,7 +56,7 @@ const Services = ({ game, services, error }: ServicesProps) => {
 
 export const getStaticPaths = async () => {
   try {
-    const response = await axiosInstance.get("/games/all");
+    const response = await axiosInstance.get("games/all");
 
     const paths = response.data.games.map((game: GameInfo) => ({
       params: { gameId: game._id },

@@ -17,7 +17,7 @@ import passwordShow from "/public/icons/passwordShow.svg";
 import passwordHide from "/public/icons/passwordHide.svg";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { GameInfo } from "@/models/Game.model";
-import ProfileGamesSelect from "@/components/ProfileGamesSelect";
+import GamesSelect from "@/components/GamesSelect";
 
 interface Password {
   value: string;
@@ -175,7 +175,7 @@ const ProfileEdit = ({ user, games, error }: ProfileEditProps) => {
       {user.role === "booster" && games && (
         <>
           <span className={styles.text}>Игры</span>
-          <ProfileGamesSelect
+          <GamesSelect
             games={games}
             selectedGames={selectedGames}
             setSelectedGames={setSelectedGames}

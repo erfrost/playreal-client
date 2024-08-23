@@ -69,6 +69,12 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
               <Status status={offer.status} />
             </div>
           </div>
+          <div className={styles.priceTime}>
+            {offer.price.toLocaleString() +
+              " ₽, " +
+              offer.days.toLocaleString() +
+              " дней"}
+          </div>
           <span className={styles.rating}>
             Рейтинг: {offer.ratingRange[0] + "-" + offer.ratingRange[1]}
           </span>

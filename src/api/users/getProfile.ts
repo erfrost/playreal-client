@@ -1,17 +1,18 @@
+import { toastError } from "@/lib/toastifyActions";
 import { AxiosResponse } from "axios";
 import axiosInstance from "axios.config";
 
-const getBaseUserInfo = async () => {
+const getProfile = async () => {
   try {
-    const res: AxiosResponse = await axiosInstance.get("users/base-info");
+    const res: AxiosResponse = await axiosInstance.get("users/profile");
 
     return res.data.user;
   } catch (error: any) {
-    console.log(
+    toastError(
       error?.response?.data?.message ||
         "При получении информации о пользователе произошла ошибка"
     );
   }
 };
 
-export default getBaseUserInfo;
+export default getProfile;

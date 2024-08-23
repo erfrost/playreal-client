@@ -17,17 +17,20 @@ import { GameInfo } from "@/models/Game.model";
 import CustomOfferBlock from "@/components/CustomOfferBlock";
 import Link from "next/link";
 import getRole from "@/api/users/getRole";
+import { Booster } from "@/models/User.model";
 
 interface ServiceProps {
   service: Service | undefined;
   game: GameInfo | undefined;
   additionalServices: ServiceInfo[] | undefined;
+  boosters: Booster[] | undefined;
   error: string | undefined;
 }
 const ServiceOffer = ({
   service,
   game,
   additionalServices,
+  boosters,
   error,
 }: ServiceProps) => {
   const [role, setRole] = useState<"user" | "booster" | undefined>(undefined);
@@ -38,7 +41,7 @@ const ServiceOffer = ({
       setRole(await getRole());
     })();
   }, []);
-
+  console.log(boosters);
   if (!service || !game || !additionalServices) return null;
 
   return (
@@ -106,23 +109,22 @@ const ServiceOffer = ({
           </div>
         </div>
         <OfferCalculator service={service} role={role} />
-        <div className={styles.footerBlock}>
-          <h2 className={styles.h2}>Выберите бустера</h2>
-          <span className={styles.boostersText}>
-            Наши бустеры - профессионалы своего дела со стажем от 3 лет. Они
-            знают все тонкости повышения рейтинга в разных играх. Доверьте
-            улучшение аккаунта настоящим экспертам!
-          </span>
-          <div className={styles.boostersList}>
-            <BoosterCard />
-            <BoosterCard />
-            <BoosterCard />
-            <BoosterCard />
-            <BoosterCard />
-            <BoosterCard />
+        {role !== "user" && boosters?.length && (
+          <div className={styles.footerBlock}>
+            <h2 className={styles.h2}>Выберите бустера</h2>
+            <span className={styles.boostersText}>
+              Наши бустеры - профессионалы своего дела со стажем от 3 лет. Они
+              знают все тонкости повышения рейтинга в разных играх. Доверьте
+              улучшение аккаунта настоящим экспертам!
+            </span>
+            <div className={styles.boostersList}>
+              {boosters.map((booster: Booster) => (
+                <BoosterCard booster={booster} key={booster._id} />
+              ))}
+            </div>
           </div>
-        </div>
-        {additionalServices.length && (
+        )}
+        {additionalServices.length ? (
           <div className={styles.footerBlock}>
             <h2 className={styles.h2}>Вам может понравиться</h2>
             <div className={styles.servicesList}>
@@ -131,7 +133,7 @@ const ServiceOffer = ({
               ))}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
@@ -176,11 +178,16 @@ export const getStaticProps = async ({ params }) => {
       `services/by_gameId/additional/${gameId}?currentServiceId=${service._id}`
     );
 
+    const boosters: AxiosResponse = await axiosInstance.get(
+      `users/boosters/${gameId}`
+    );
+
     return {
       props: {
         service,
         game: gameResponse.data.game,
         additionalServices: additionalServices.data.services,
+        boosters: boosters.data.boosters,
         revalidate: 60,
       },
     };

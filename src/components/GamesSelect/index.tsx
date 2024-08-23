@@ -2,16 +2,16 @@ import { GameInfo } from "@/models/Game.model";
 import styles from "./index.module.css";
 import { Dispatch, SetStateAction } from "react";
 
-interface ProfileGamesSelectProps {
+interface GamesSelectProps {
   games: GameInfo[];
   selectedGames: string[];
   setSelectedGames: Dispatch<SetStateAction<string[]>>;
 }
-const ProfileGamesSelect = ({
+const GamesSelect = ({
   games,
   selectedGames,
   setSelectedGames,
-}: ProfileGamesSelectProps) => {
+}: GamesSelectProps) => {
   const onSelectGame = (gameId: string) => {
     setSelectedGames((prevState: string[]) => {
       if (prevState.find((id: string) => id === gameId)) {
@@ -49,4 +49,4 @@ const ProfileGamesSelect = ({
   );
 };
 
-export default ProfileGamesSelect;
+export default GamesSelect;

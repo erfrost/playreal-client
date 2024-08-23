@@ -16,6 +16,8 @@ export interface Offer {
   boosterId?: string;
   boosterName?: string;
   boosterAvatar?: string;
+  price: number;
+  days: number;
   createdAt: string;
   updatedAt: string;
   __v: number;

@@ -82,7 +82,7 @@ const CatalogList = ({ games, setIsOpen }: CatalogListProps) => {
       {screenWidth <= 825 && <div className={styles.background}></div>}
       <div className={styles.list}>
         {games?.map((game: GameWithServices) => (
-          <GameItem game={game} key={game._id} />
+          <GameItem game={game} key={game._id} setIsOpenCatalog={setIsOpen} />
         ))}
       </div>
     </div>

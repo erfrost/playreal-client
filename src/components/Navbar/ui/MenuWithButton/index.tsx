@@ -30,12 +30,14 @@ const MenuWithButton = ({ logout, user }: MenuWithButtonProps) => {
           <DropdownMenuLabel className="py-1 px-2">
             <span className="text-neutral-500">Account</span>
           </DropdownMenuLabel>
-          {/* {user && user.role === "booster" && (
-            <DropdownMenuItem className={styles.menuBtn}>
-              <Money color="#4CAF50" size={16} />
-              Orders
-            </DropdownMenuItem>
-          )} */}
+          {user && user.role === "booster" && (
+            <Link href="/orders">
+              <DropdownMenuItem className={styles.menuBtn}>
+                <Money color="#4CAF50" size={16} />
+                Orders
+              </DropdownMenuItem>
+            </Link>
+          )}
           <DropdownMenuSeparator className={styles.separator} />
           <Link href="/profile">
             <DropdownMenuItem className={styles.menuBtn}>

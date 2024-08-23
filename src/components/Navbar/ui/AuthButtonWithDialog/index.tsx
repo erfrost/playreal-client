@@ -59,7 +59,7 @@ const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
     setNickname("");
     setPassword("");
   }, [windowType]);
-
+  console.log(email, password, role);
   const onSubmit = async () => {
     if (windowType === "signIn") await signIn(email, password, role);
     else await signUp(email, nickname, password, role);

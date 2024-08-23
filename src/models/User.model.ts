@@ -20,3 +20,10 @@ export interface UserInfo {
   role: "user" | "booster";
   games: string[];
 }
+
+export interface Booster {
+  _id: string;
+  nickname: string;
+  description: string;
+  avatar_url: string;
+}

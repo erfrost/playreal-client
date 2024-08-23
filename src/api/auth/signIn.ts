@@ -16,6 +16,8 @@ const signIn = async (
     });
     const data = res.data;
 
+    console.log("data: ", data);
+
     setCookie("access_token", data.access_token);
     setCookie("refresh_token", data.refresh_token);
     setCookie("user_id", data.userId);

@@ -65,7 +65,7 @@ const Profile = ({ user, offers, error }: ProfileProps) => {
                   offers?.length === 1 && styles.oneOfferContainer
                 }`}
               >
-                {offers.length ? (
+                {offers?.length ? (
                   offers?.map((offer: Offer) => (
                     <ProfileOffer offer={offer} user={user} key={offer._id} />
                   ))
@@ -92,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         Authorization: "Bearer " + accessToken,
       },
     });
-    const offers: AxiosResponse = await axiosInstance.get("offers/all", {
+    const offers: AxiosResponse = await axiosInstance.get("offers/personal", {
       headers: {
         Authorization: "Bearer " + accessToken,
       },

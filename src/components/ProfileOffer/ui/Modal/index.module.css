@@ -94,6 +94,15 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.priceTime {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 15px;
+}
 
 @media screen and (max-width: 622px) {
   .content {

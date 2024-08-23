@@ -68,7 +68,6 @@ const CartButtonWithSlider = () => {
   }, [isCartOpen]);
 
   const onCreateOffer = async () => {
-    console.log("create");
     if (!cart.length) return toastWarning("Корзина пуста");
 
     try {

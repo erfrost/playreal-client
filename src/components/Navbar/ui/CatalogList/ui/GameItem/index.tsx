@@ -1,7 +1,7 @@
 import { GameWithServices } from "@/models/Game.model";
 import styles from "./index.module.css";
 import arrow from "/public/icons/arrowBottom.svg";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import ImageNotDraggable from "@/components/ui/ImageNotDraggable";
 import Link from "next/link";
 
@@ -12,8 +12,9 @@ interface Service {
 
 interface GameItemProps {
   game: GameWithServices;
+  setIsOpenCatalog: Dispatch<SetStateAction<boolean>>;
 }
-const GameItem = ({ game }: GameItemProps) => {
+const GameItem = ({ game, setIsOpenCatalog }: GameItemProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -35,6 +36,7 @@ const GameItem = ({ game }: GameItemProps) => {
             href={`/service/${service._id}`}
             className={styles.item}
             key={service._id}
+            onClick={() => setIsOpenCatalog(false)}
           >
             <span className={styles.serviceTitle}>{service.name}</span>
           </Link>

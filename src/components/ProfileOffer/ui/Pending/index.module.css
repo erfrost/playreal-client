@@ -10,6 +10,7 @@
   font-weight: 400;
   line-height: 22.58px;
   color: #ba8f00;
+  user-select: none;
 }
 
 @media screen and (max-width: 650px) {

@@ -11,10 +11,12 @@ import ImageNotDraggable from "@/components/ui/ImageNotDraggable";
 import { AxiosResponse } from "axios";
 import axiosInstance from "axios.config";
 import { Requirement, Service, ServiceInfo } from "@/models/Service.model";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toastError } from "@/lib/toastifyActions";
 import { GameInfo } from "@/models/Game.model";
 import CustomOfferBlock from "@/components/CustomOfferBlock";
+import Link from "next/link";
+import getRole from "@/api/users/getRole";
 
 interface ServiceProps {
   service: Service | undefined;
@@ -28,8 +30,13 @@ const ServiceOffer = ({
   additionalServices,
   error,
 }: ServiceProps) => {
+  const [role, setRole] = useState<"user" | "booster" | undefined>(undefined);
   useEffect(() => {
     if (error) toastError(error);
+
+    (async () => {
+      setRole(await getRole());
+    })();
   }, []);
 
   if (!service || !game || !additionalServices) return null;
@@ -67,10 +74,10 @@ const ServiceOffer = ({
               style={{ alignSelf: "flex-start" }}
             />
           </div>
-          <a href="https://www.trustpilot.com/" className={styles.statBtn}>
+          <Link href="https://www.trustpilot.com/" className={styles.statBtn}>
             <span className={styles.statBtnText}>Trustpilot</span>
             <ImageNotDraggable src={arrowIcon} alt="arrow" />
-          </a>
+          </Link>
         </div>
       </div>
       <div className={styles.content}>
@@ -83,9 +90,11 @@ const ServiceOffer = ({
             <h4 className={styles.h4}>Изображения</h4>
             <ImagesSlider images={service.images} />
           </div>
-          <div className={styles.block}>
-            <CustomOfferBlock />
-          </div>
+          {(!role || role === "user") && (
+            <div className={styles.block}>
+              <CustomOfferBlock />
+            </div>
+          )}
           <div className={styles.block}>
             <h3 className={styles.h3}>Требования</h3>
             <span className={styles.defaultText}>
@@ -96,7 +105,7 @@ const ServiceOffer = ({
             ))}
           </div>
         </div>
-        <OfferCalculator service={service} />
+        <OfferCalculator service={service} role={role} />
         <div className={styles.footerBlock}>
           <h2 className={styles.h2}>Выберите бустера</h2>
           <span className={styles.boostersText}>

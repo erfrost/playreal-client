@@ -7,7 +7,7 @@ import { toastSuccess } from "@/lib/toastifyActions";
 import { useRecoilState } from "recoil";
 import { cartState } from "@/storage/atoms";
 import randomNumber from "@/lib/randomNumber";
-import { CartItem } from "@/models/CartItem";
+import { CartItem } from "@/models/CartItem.model";
 
 const calculateTotalSum = (object: ResultValue) => {
   return Object.values(object).reduce((total, value) => total + value, 0);
@@ -18,14 +18,16 @@ interface SubmitBlockProps {
   price: ResultValue;
   days: ResultValue;
   resultOffer: ResultOffer;
+  role: "user" | "booster" | undefined;
 }
 const SubmitBlock = ({
   basePrice,
   price,
   days,
   resultOffer,
+  role,
 }: SubmitBlockProps) => {
-  const [cart, setCart] = useRecoilState<CartItem[]>(cartState);
+  const [_, setCart] = useRecoilState<CartItem[]>(cartState);
   const cartId: string = randomNumber();
   const totalPrice: number = calculateTotalSum(price);
   const totalDays: number = calculateTotalSum(days);
@@ -86,19 +88,21 @@ const SubmitBlock = ({
           <h4 className={styles.deadlines}>{Math.ceil(totalDays)} дней</h4>
           <span className={styles.name}>На буст</span>
         </div>
-        <button
-          className={styles.submitBtn}
-          onClick={() => {
-            addInCart({ ...resultOffer, cartId });
-            setCart((prevState: CartItem[]) => [
-              ...prevState,
-              { ...resultOffer, cartId },
-            ]);
-            toastSuccess("Товар добавлен в корзину");
-          }}
-        >
-          В корзину
-        </button>
+        {(!role || role === "user") && (
+          <button
+            className={styles.submitBtn}
+            onClick={() => {
+              addInCart({ ...resultOffer, cartId });
+              setCart((prevState: CartItem[]) => [
+                ...prevState,
+                { ...resultOffer, cartId },
+              ]);
+              toastSuccess("Товар добавлен в корзину");
+            }}
+          >
+            В корзину
+          </button>
+        )}
       </div>
     </div>
   );

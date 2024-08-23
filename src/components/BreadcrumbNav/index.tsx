@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
+import Link from "next/link";
 
 interface Route {
   title: string;
@@ -39,9 +40,9 @@ const BreadcrumbNav = ({ routes, theme }: BreadcrumbNavProps) => {
     >
       {routes.slice(0, -1).map((route: Route, index: number) => (
         <div className={styles.link} key={index}>
-          <a href={route.path} className={styles.item}>
+          <Link href={route.path} className={styles.item}>
             {route.title}
-          </a>
+          </Link>
           <span className={styles.separator}>/</span>
         </div>
       ))}

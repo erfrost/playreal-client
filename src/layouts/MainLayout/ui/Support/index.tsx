@@ -81,13 +81,13 @@ const Support = () => {
               setText(e.target.value)
             }
           />
-          <div className={styles.sendBtn} onClick={() => setText("")}>
+          <button className={styles.sendBtn} onClick={() => setText("")}>
             <ImageNotDraggable
               src={sendIcon}
               alt="sendIcon"
               className={styles.sendIcon}
             />
-          </div>
+          </button>
         </div>
       </div>
     </div>

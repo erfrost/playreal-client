@@ -14,6 +14,7 @@ import { deleteCookie } from "cookies-next";
 import { UserInfo } from "@/models/User.model";
 import noAvatar from "public/noAvatar.png";
 import { GameWithServices } from "@/models/Game.model";
+import Link from "next/link";
 
 interface MobileNavbarProps {
   games: GameWithServices[];
@@ -70,7 +71,7 @@ const MobileNavbar = ({ games, user, setUser }: MobileNavbarProps) => {
       {isOpenInput ? (
         <Search isMobile isOpen={isOpenInput} setIsOpenInput={setIsOpenInput} />
       ) : (
-        <a href="/" className={styles.logoContainer}>
+        <Link href="/" className={styles.logoContainer}>
           <ImageNotDraggable
             src="/playreal-logo.svg"
             alt="playreal logo"
@@ -78,7 +79,7 @@ const MobileNavbar = ({ games, user, setUser }: MobileNavbarProps) => {
             width={122}
             className={styles.logo}
           />
-        </a>
+        </Link>
       )}
 
       <div className={styles.profile}>
@@ -100,14 +101,14 @@ const MobileNavbar = ({ games, user, setUser }: MobileNavbarProps) => {
                   className={styles.avatar}
                 />
 
-                <MenuWithButton logout={logout} />
+                <MenuWithButton logout={logout} user={user} />
               </div>
             ) : (
               <AuthButtonWithDialog setUser={setUser} />
             )}
           </>
         )}
-        <CartButtonWithSlider />
+        {(!user || user.role === "user") && <CartButtonWithSlider />}
       </div>
     </nav>
   );

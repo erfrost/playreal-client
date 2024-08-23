@@ -56,6 +56,7 @@
 .userContainer {
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 .nickname {
   font-size: 0.875rem;

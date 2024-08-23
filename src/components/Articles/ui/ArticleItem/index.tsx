@@ -3,6 +3,7 @@ import Insc from "@/components/typography/Inscriptions";
 import H4 from "@/components/typography/H4";
 import ButtonGr from "../ButtonGr";
 import ImageNotDraggable from "@/components/ui/ImageNotDraggable";
+import Link from "next/link";
 
 interface ArticleItemProps {
   marginRight?: string;
@@ -10,7 +11,7 @@ interface ArticleItemProps {
 const ArticleItem = ({ marginRight }: ArticleItemProps) => {
   return (
     <>
-      <a
+      <Link
         href="#"
         className={`${styles.container} w-[360px] h-[495px] bg-[#F5F5F5] rounded-[15px]`}
         style={marginRight ? { marginRight: "50px" } : {}}
@@ -42,7 +43,7 @@ const ArticleItem = ({ marginRight }: ArticleItemProps) => {
             </p>
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };

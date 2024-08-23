@@ -5,6 +5,7 @@ import ArticleItem from "./ui/ArticleItem";
 import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
+import Link from "next/link";
 
 const Articles = () => {
   const [screenWidth, setScreenWidth] = useState<number>(1920);
@@ -35,13 +36,13 @@ const Articles = () => {
               <Subtitle className={`${styles.title} inline-block`}>
                 Читайте наши статьи
               </Subtitle>
-              <a href="#">
+              <Link href="#">
                 <H4
                   className={`absolute bottom-0 right-[20px] cursor-[pointer]`}
                 >
                   Все статьи
                 </H4>
-              </a>
+              </Link>
               <ImageNotDraggable
                 className={`absolute bottom-[2px] right-0 cursor-[pointer]`}
                 src="./chevron-right.svg"

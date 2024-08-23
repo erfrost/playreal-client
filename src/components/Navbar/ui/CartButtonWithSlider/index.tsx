@@ -11,7 +11,10 @@ import { getCart } from "@/services/cart.service";
 import { useRecoilState } from "recoil";
 import { cartState } from "@/storage/atoms";
 import getCartItemPrice from "@/api/services/getCartItemPrice";
-import { CartItem, CartItemWithPrice } from "@/models/CartItem";
+import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
+import { toastError, toastSuccess, toastWarning } from "@/lib/toastifyActions";
+import axiosInstance from "axios.config";
+import { deleteCookie, setCookie } from "cookies-next";
 
 const CartButtonWithSlider = () => {
   const [cart, setCart] = useRecoilState<CartItem[]>(cartState);
@@ -64,6 +67,25 @@ const CartButtonWithSlider = () => {
     };
   }, [isCartOpen]);
 
+  const onCreateOffer = async () => {
+    console.log("create");
+    if (!cart.length) return toastWarning("Корзина пуста");
+
+    try {
+      await axiosInstance.post("offers/create", {
+        services: cart,
+      });
+
+      setCart([]);
+      deleteCookie("cart");
+      toastSuccess("Успешно");
+    } catch (error: any) {
+      toastError(
+        error?.response?.data?.message || "При создании заказа произошла ошибка"
+      );
+    }
+  };
+
   return (
     <>
       <div
@@ -104,7 +126,12 @@ const CartButtonWithSlider = () => {
                       : "Загрузка..."}
                   </h2>
                 </div>
-                <PrimaryBtn className={styles.submitBtn}>Checkout</PrimaryBtn>
+                <PrimaryBtn
+                  className={styles.submitBtn}
+                  onClick={onCreateOffer}
+                >
+                  Checkout
+                </PrimaryBtn>
               </div>
             </CartOverlay>
           </>

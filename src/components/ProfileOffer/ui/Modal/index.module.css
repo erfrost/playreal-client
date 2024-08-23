@@ -1,0 +1,120 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  cursor: default;
+}
+.content {
+  width: 600px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.gameName {
+  font-size: 32px;
+  font-weight: 700;
+  align-self: center;
+}
+.text {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.user:hover .nickname {
+  opacity: 0.75;
+}
+.image {
+  aspect-ratio: 1;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.nickname {
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.serviceHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+.status {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  max-width: 65%;
+  transition: all 0.3s ease;
+}
+.title:hover {
+  opacity: 0.75;
+}
+.rating {
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+.additionals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 5px;
+}
+.btn {
+  margin-top: 25px;
+  border-radius: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media screen and (max-width: 622px) {
+  .content {
+    width: 450px;
+  }
+}
+@media screen and (max-width: 472px) {
+  .container {
+    padding: 10px;
+  }
+  .content {
+    width: 100%;
+    padding: 15px;
+  }
+  .image {
+    width: 40px;
+  }
+  .title {
+    font-size: 15px;
+  }
+  .status img {
+    display: none;
+  }
+}

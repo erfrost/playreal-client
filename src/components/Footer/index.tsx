@@ -7,12 +7,13 @@ import telegramIcon from "/public/icons/Telegram.svg";
 import twitchIcon from "/public/icons/Twitch.svg";
 import steamIcon from "/public/icons/Steam.svg";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <div className="max-w-[95%] w-[95%] mx-auto mt-[120px] pb-[75px]">
       <div className={`${styles.content} flex justify-between`}>
-        <a href="/">
+        <Link href="/">
           <ImageNotDraggable
             src={logo}
             height={27}
@@ -20,7 +21,7 @@ const Footer = () => {
             alt="image"
             className={styles.logo}
           />
-        </a>
+        </Link>
 
         <div className={`${styles.links} flex gap-[52px]`}>
           <FontMenu>Безопасность</FontMenu>
@@ -31,7 +32,7 @@ const Footer = () => {
         </div>
 
         <div className={`${styles.socials} flex gap-[21px]`}>
-          <a href="#">
+          <Link href="#">
             <ImageNotDraggable
               src={vkIcon}
               height={23}
@@ -39,8 +40,8 @@ const Footer = () => {
               alt="image"
               className={styles.socialIcon}
             />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <ImageNotDraggable
               src={instagramIcon}
               height={23}
@@ -48,8 +49,8 @@ const Footer = () => {
               alt="image"
               className={styles.socialIcon}
             />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <ImageNotDraggable
               src={telegramIcon}
               height={23}
@@ -57,8 +58,8 @@ const Footer = () => {
               alt="image"
               className={styles.socialIcon}
             />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <ImageNotDraggable
               src={twitchIcon}
               height={23}
@@ -66,8 +67,8 @@ const Footer = () => {
               alt="image"
               className={styles.socialIcon}
             />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <ImageNotDraggable
               src={steamIcon}
               height={23}
@@ -75,7 +76,7 @@ const Footer = () => {
               alt="image"
               className={styles.socialIcon}
             />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import arrow from "/public/icons/arrowBottom.svg";
 import { useState } from "react";
 import ImageNotDraggable from "@/components/ui/ImageNotDraggable";
+import Link from "next/link";
 
 interface Service {
   _id: string;
@@ -30,13 +31,13 @@ const GameItem = ({ game }: GameItemProps) => {
       </div>
       <div className={`${styles.list} ${isOpen && styles.listOpen}`}>
         {game.services.map((service: Service) => (
-          <a
+          <Link
             href={`/service/${service._id}`}
             className={styles.item}
             key={service._id}
           >
             <span className={styles.serviceTitle}>{service.name}</span>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

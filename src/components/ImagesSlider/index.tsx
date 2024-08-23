@@ -3,6 +3,7 @@ import image from "/public/service-img.png";
 import arrowLeft from "/public/icons/sliderArrow.svg";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
 import { useState } from "react";
+import PrimaryBtn from "../PrimaryBtn";
 
 interface ImagesSliderProps {
   images: string[];
@@ -47,12 +48,12 @@ const ImagesSlider = ({ images }: ImagesSliderProps) => {
 
   return (
     <div className={styles.container}>
-      <button
+      <PrimaryBtn
         className={`${styles.btn} ${styles.leftBtn}`}
         onClick={() => handleScroll("left")}
       >
         <ImageNotDraggable src={arrowLeft} alt="arrow" />
-      </button>
+      </PrimaryBtn>
       <div className={styles.list}>
         {images.map((image: string, index: number) => (
           <ImageNotDraggable
@@ -65,7 +66,7 @@ const ImagesSlider = ({ images }: ImagesSliderProps) => {
           />
         ))}
       </div>
-      <button
+      <PrimaryBtn
         className={`${styles.btn} ${styles.rightBtn}`}
         onClick={() => handleScroll("right")}
       >
@@ -74,7 +75,7 @@ const ImagesSlider = ({ images }: ImagesSliderProps) => {
           alt="arrow"
           style={{ transform: "rotate(180deg)" }}
         />
-      </button>
+      </PrimaryBtn>
     </div>
   );
 };

@@ -9,19 +9,21 @@ import axiosInstance from "axios.config";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useEffect } from "react";
 import noAvatar from "public/noAvatar.png";
+import { Offer } from "@/models/Offer.model";
 
 interface ProfileProps {
   user: User | undefined;
+  offers: Offer[] | undefined;
   error: string | undefined;
 }
-const Profile = ({ user, error }: ProfileProps) => {
+const Profile = ({ user, offers, error }: ProfileProps) => {
   useEffect(() => {
     if (error) toastError(error);
   }, []);
 
   return (
     <div className={styles.container}>
-      {user && (
+      {user && offers && (
         <>
           <BreadcrumbNav
             theme="dark"
@@ -31,7 +33,7 @@ const Profile = ({ user, error }: ProfileProps) => {
                 path: "/",
               },
               {
-                title: user.nickname,
+                title: "Профиль",
                 path: "/profile",
               },
             ]}
@@ -58,23 +60,18 @@ const Profile = ({ user, error }: ProfileProps) => {
             </div>
             <div className={styles.offersContainer}>
               <h3 className={styles.offersTitle}>Ваши заказы</h3>
-              <div className={styles.offersList}>
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
-                <ProfileOffer />
+              <div
+                className={`${styles.offersList} ${
+                  offers?.length === 1 && styles.oneOfferContainer
+                }`}
+              >
+                {offers.length ? (
+                  offers?.map((offer: Offer) => (
+                    <ProfileOffer offer={offer} user={user} key={offer._id} />
+                  ))
+                ) : (
+                  <span>Ничего не найдено</span>
+                )}
               </div>
             </div>
           </div>
@@ -90,7 +87,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const accessToken: string | undefined = req.cookies.access_token;
 
-    const res: AxiosResponse = await axiosInstance.get("user/profile", {
+    const user: AxiosResponse = await axiosInstance.get("users/profile", {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+    const offers: AxiosResponse = await axiosInstance.get("offers/all", {
       headers: {
         Authorization: "Bearer " + accessToken,
       },
@@ -98,7 +100,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: {
-        user: res.data.user,
+        user: user.data.user,
+        offers: offers.data.offers,
       },
     };
   } catch (error: any) {

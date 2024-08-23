@@ -19,7 +19,7 @@ import { useRecoilState } from "recoil";
 import { setCookie } from "cookies-next";
 import { authIsPendingState } from "@/storage/atoms";
 import { UserInfo } from "@/models/User.model";
-import getBaseUserInfo from "@/api/user/getBaseUserInfo";
+import getBaseUserInfo from "@/api/users/getBaseUserInfo";
 
 interface AuthButtonWithDialogProps {
   setUser: Dispatch<SetStateAction<UserInfo | null>>;
@@ -103,7 +103,7 @@ const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
           </div>
           {/* )} */}
           <div className={styles.oauth}>
-            <button onClick={handleGoogleLogin} className={styles.googleBtn}>
+            <div onClick={handleGoogleLogin} className={styles.googleBtn}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -130,7 +130,7 @@ const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
                 ></path>
               </svg>
               Continue with Google
-            </button>
+            </div>
             <button className={styles.discordBtn} onClick={handleDiscordLogin}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -186,9 +186,15 @@ const AuthButtonWithDialog = ({ setUser }: AuthButtonWithDialogProps) => {
               className="!ring-[#D681FF]"
               placeholder="Password"
               type="password"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                const value: string = e.target.value;
+                const filteredValue: string = value.replace(
+                  /[^a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"'<>,.?~`\\|-]/g,
+                  ""
+                );
+
+                setPassword(filteredValue);
+              }}
               value={password}
             />
             <span

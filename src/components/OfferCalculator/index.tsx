@@ -17,8 +17,9 @@ export interface ResultValue {
 }
 interface OfferCalculatorProps {
   service: Service;
+  role: "user" | "booster" | undefined;
 }
-const OfferCalculator = ({ service }: OfferCalculatorProps) => {
+const OfferCalculator = ({ service, role }: OfferCalculatorProps) => {
   const [resultOffer, setResultOffer] = useState<ResultOffer>({
     serviceId: service._id,
     ratingRange: service.ratingRange,
@@ -71,6 +72,7 @@ const OfferCalculator = ({ service }: OfferCalculatorProps) => {
         price={resultPrice}
         days={resultDays}
         resultOffer={resultOffer}
+        role={role}
       />
     </div>
   );

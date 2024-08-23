@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import mergeInputs from "@/lib/mergeInputs";
+import styles from "./index.module.css";
 
 interface PrimaryBtnProps {
   children: ReactNode;
@@ -17,10 +17,7 @@ export default function PrimaryBtn({
     <button
       onClick={onClick}
       type={type}
-      className={mergeInputs(
-        `bg-[#D681FF] py-2 px-5 text-white rounded-md font-semibold active:translate-y-1 select-none`,
-        className
-      )}
+      className={`${className} ${styles.container}`}
     >
       {children}
     </button>

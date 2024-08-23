@@ -1,4 +1,4 @@
-import { CartItem } from "@/models/CartItem";
+import { CartItem } from "@/models/CartItem.model";
 import { atom } from "recoil";
 
 export const cartState = atom<CartItem[]>({

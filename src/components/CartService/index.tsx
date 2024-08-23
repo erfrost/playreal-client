@@ -5,7 +5,7 @@ import RemoveWindow from "./ui/RemoveWindow";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
 import { Additional } from "@/models/Service.model";
 import CheckBoxItem from "./ui/CheckBoxItem";
-import { CartItem, CartItemWithPrice } from "@/models/CartItem";
+import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
 
 interface CartServiceProps {
   service: CartItemWithPrice;

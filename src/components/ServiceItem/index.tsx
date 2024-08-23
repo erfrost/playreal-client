@@ -2,6 +2,7 @@ import styles from "./index.module.css";
 import PrimaryBtn from "../PrimaryBtn";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
 import { ServiceInfo } from "@/models/Service.model";
+import Link from "next/link";
 
 interface ServiceItemProps {
   service: ServiceInfo;
@@ -31,9 +32,9 @@ const ServiceItem = ({ service }: ServiceItemProps) => {
           <span className={styles.price}>
             От {service.basePrice.toLocaleString()} ₽
           </span>
-          <a href={`/service/${service._id}`}>
+          <Link href={`/service/${service._id}`}>
             <PrimaryBtn className={styles.btn}>К услуге</PrimaryBtn>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

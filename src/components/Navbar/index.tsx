@@ -11,13 +11,14 @@ import Skeleton from "../ui/Skeleton";
 import CatalogList from "./ui/CatalogList";
 import ImageNotDraggable from "../ui/ImageNotDraggable";
 import { UserInfo } from "@/models/User.model";
-import getBaseUserInfo from "@/api/user/getBaseUserInfo";
+import getBaseUserInfo from "@/api/users/getBaseUserInfo";
 import { deleteCookie } from "cookies-next";
 import noAvatar from "public/noAvatar.png";
 import { GameWithServices } from "@/models/Game.model";
 import getGamesWithServices from "@/api/games/getGamesWithServices";
 import { useRecoilValue } from "recoil";
 import { authIsPendingState } from "@/storage/atoms";
+import Link from "next/link";
 
 const Navbar = () => {
   const [games, setGames] = useState<GameWithServices[]>([]);
@@ -74,7 +75,7 @@ const Navbar = () => {
   return (
     <nav className={styles.container}>
       <div className={styles.left}>
-        <a href="/">
+        <Link href="/">
           <ImageNotDraggable
             src="/playreal-logo.svg"
             alt="playreal logo"
@@ -82,7 +83,7 @@ const Navbar = () => {
             width={122}
             className={styles.logo}
           />
-        </a>
+        </Link>
         <div className={styles.catalogRelative}>
           <PrimaryBtn
             className={styles.catalogBtn}
@@ -124,14 +125,14 @@ const Navbar = () => {
                   className={styles.avatar}
                 />
 
-                <MenuWithButton logout={logout} />
+                <MenuWithButton logout={logout} user={user} />
               </div>
             ) : (
               <AuthButtonWithDialog setUser={setUser} />
             )}
           </>
         )}
-        <CartButtonWithSlider />
+        {(!user || user.role === "user") && <CartButtonWithSlider />}
       </div>
     </nav>
   );

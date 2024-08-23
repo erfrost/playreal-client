@@ -1,5 +1,5 @@
 import { toastError } from "@/lib/toastifyActions";
-import { CartItem } from "@/models/CartItem";
+import { CartItem } from "@/models/CartItem.model";
 import { AxiosResponse } from "axios";
 import axiosInstance from "axios.config";
 

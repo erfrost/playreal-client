@@ -4,7 +4,7 @@ import axiosInstance from "axios.config";
 
 const getBaseUserInfo = async () => {
   try {
-    const res: AxiosResponse = await axiosInstance.get("user/base-info");
+    const res: AxiosResponse = await axiosInstance.get("users/base-info");
 
     return res.data.user;
   } catch (error: any) {

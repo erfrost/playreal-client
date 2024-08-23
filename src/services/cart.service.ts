@@ -1,5 +1,5 @@
 import { toastError } from "@/lib/toastifyActions";
-import { CartItem } from "@/models/CartItem";
+import { CartItem } from "@/models/CartItem.model";
 import { getCookie, setCookie } from "cookies-next";
 
 export const getCart = () => {

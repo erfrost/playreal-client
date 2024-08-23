@@ -2,7 +2,7 @@ import PrimaryBtn from "@/components/PrimaryBtn";
 import styles from "./index.module.css";
 import { Dispatch, SetStateAction } from "react";
 import { removeFromCart } from "@/services/cart.service";
-import { CartItem } from "@/models/CartItem";
+import { CartItem } from "@/models/CartItem.model";
 
 interface RemoveWindowProps {
   cartId: string;

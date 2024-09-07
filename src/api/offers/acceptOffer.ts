@@ -9,7 +9,7 @@ const acceptOffer = async (offer: Offer) => {
       offer,
     });
 
-    return res.data.offer;
+    return res.data;
   } catch (error: any) {
     toastError(
       error?.response?.data?.message || "При принятии заказа произошла ошибка"

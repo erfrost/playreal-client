@@ -6,10 +6,11 @@ import Link from "next/link";
 import CheckBoxItem from "@/components/CartService/ui/CheckBoxItem";
 import { Additional } from "@/models/Service.model";
 import PrimaryBtn from "@/components/PrimaryBtn";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import acceptOffer from "@/api/offers/acceptOffer";
 import { toastSuccess } from "@/lib/toastifyActions";
 import Status from "../Status";
+import { NextRouter, useRouter } from "next/router";
 
 interface ModalProps {
   offer: Offer;
@@ -18,6 +19,8 @@ interface ModalProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
+  const [chatId, setChatId] = useState<string | undefined>(undefined);
+  const router: NextRouter = useRouter();
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
   const onClose = (e: MouseEvent) => {
@@ -35,14 +38,15 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
   const onClickBtn = async () => {
     if (offer.status === "Pending") {
       try {
-        const acceptedOffer: Offer = await acceptOffer(offer);
+        const { offer: acceptedOffer, chatId } = await acceptOffer(offer);
 
         setOffer(acceptedOffer);
+        setChatId(chatId);
       } catch {
         return;
       }
     } else {
-      toastSuccess("Тут переход в чат");
+      if (chatId) router.push(`/chats?chatId=${chatId}`);
     }
   };
 

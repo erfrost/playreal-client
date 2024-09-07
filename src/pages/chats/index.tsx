@@ -9,6 +9,7 @@ import getUserId from "@/api/users/getUserId";
 import { toastError } from "@/lib/toastifyActions";
 import { Message } from "@/models/Message.model";
 import { Socket, io } from "socket.io-client";
+import { NextRouter, useRouter } from "next/router";
 
 interface OnlineStatusPayload {
   userId: string;
@@ -22,6 +23,8 @@ const Chats = () => {
   const [currentChat, setCurrentChat] = useState<Chat | undefined>(undefined);
   const [currentChatMessages, setCurrentChatMessages] = useState<Message[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
+  const router: NextRouter = useRouter();
+  const chatId: any = router.query.chatId;
 
   useEffect(() => {
     (async () => {
@@ -36,7 +39,14 @@ const Chats = () => {
       if (!chats) return;
 
       setChats(chats);
-      setCurrentChat(chats[0]);
+
+      if (chatId) {
+        const chatById: Chat | undefined = chats.find(
+          (chat: Chat) => chat._id === chatId
+        );
+        if (!chatById) return setCurrentChat(chats[0]);
+        else setCurrentChat(chatById);
+      } else setCurrentChat(chats[0]);
     })();
   }, []);
 
@@ -127,7 +137,7 @@ const Chats = () => {
   };
 
   const onSelectChat = (chatId: string) => {
-    if (!chatId) return;
+    if (!chatId || (currentChat && chatId === currentChat._id)) return;
 
     setCurrentChatMessages([]);
     setCurrentChat(chats.find((chat: Chat) => chat._id === chatId));

@@ -15,11 +15,13 @@ const ProfileOffer = ({ offer, user }: ProfileOfferProps) => {
   const [offerState, setOfferState] = useState<Offer>(offer);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  if (!offerState) return null;
+
   return (
     <div className={styles.container} onClick={() => setIsOpen(true)}>
       <div className={styles.block}>
         <ImageNotDraggable
-          src={offerState.serviceImage}
+          src={offerState?.serviceImage}
           width={48}
           height={48}
           alt="image"

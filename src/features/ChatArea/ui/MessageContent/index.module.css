@@ -1,0 +1,45 @@
+.container {
+  background-color: #efccff;
+  padding: 8px 15px;
+  border-radius: 30px 30px 2px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.combinedText {
+  padding: 0 5px 5px 5px;
+}
+.filesContainer {
+  padding: 2px;
+  border-radius: 6px;
+  background-color: #98b2ff !important;
+  border-radius: 2px !important;
+}
+.combinedFilesContainer {
+  background-color: #efccff !important;
+}
+.files {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  background-color: #98b2ff !important;
+}
+.file {
+  width: 175px;
+  min-width: 175px;
+  height: 200px;
+  min-height: 200px;
+  border-radius: 2px;
+  flex-grow: 1;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .text {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,16 @@
+.input {
+  flex-grow: 1;
+  /* padding-left: 15px; */
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+.input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 725px) {
+  .input {
+    border-radius: 0 0 0 30px;
+  }
+}

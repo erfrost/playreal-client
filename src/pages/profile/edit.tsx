@@ -18,6 +18,7 @@ import passwordHide from "/public/icons/passwordHide.svg";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { GameInfo } from "@/models/Game.model";
 import GamesSelect from "@/components/GamesSelect";
+import uploadImage from "@/api/files/uploadImage";
 
 interface Password {
   value: string;
@@ -55,27 +56,8 @@ const ProfileEdit = ({ user, games, error }: ProfileEditProps) => {
     const file: File | null = e.target.files![0];
     if (!file) return;
 
-    try {
-      const formData: FormData = new FormData();
-      formData.append("image", file);
-
-      const res: AxiosResponse = await axiosInstance.post(
-        "files/singleUpload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      setAvatar(res.data.image_url);
-    } catch (error: any) {
-      toastError(
-        error?.response?.data?.message ||
-          "При загрузке изображения на сервер произошла ошибка"
-      );
-    }
+    const newImage: string = await uploadImage(file);
+    setAvatar(newImage);
   };
 
   const onPasswordChange = (

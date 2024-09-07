@@ -1,0 +1,108 @@
+.container {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.container:hover .icon {
+  opacity: 0.75;
+}
+.input {
+  display: none;
+}
+.icon {
+  aspect-ratio: 1;
+  width: 50%;
+  transition: all 0.2s ease;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8423828941912942;
+  cursor: default;
+}
+.modalContent {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+}
+.modalTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+.modalFiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.fileContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fileContainer:hover .file {
+  filter: brightness(0.5);
+}
+.fileContainer:hover .deleteIcon {
+  opacity: 1;
+}
+.file {
+  width: 150px;
+  min-width: 150px;
+  height: 175px;
+  min-height: 175px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.deleteIcon {
+  position: absolute;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.between {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttonsGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.btn {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 15px;
+}
+.textInput {
+  flex-grow: 1;
+  border: 1px solid rgb(171, 171, 171);
+  padding: 5px 15px;
+  border-radius: 6px;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+.textInput:focus-visible {
+  outline: none;
+  box-shadow: none;
+}

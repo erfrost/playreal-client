@@ -19,18 +19,20 @@ const GameItem = ({ game, setIsOpenCatalog }: GameItemProps) => {
 
   return (
     <div className={styles.container}>
-      <div
-        className={`${styles.name} ${isOpen && styles.openName}`}
-        onClick={() => setIsOpen((prevState) => !prevState)}
+      <Link
+        href={`/games/${game._id}`}
+        // className={`${styles.name} ${isOpen && styles.openName}`}
+        className={styles.name}
+        onClick={() => setIsOpenCatalog(false)}
       >
         <span className={styles.title}>{game.title}</span>
-        <ImageNotDraggable
+        {/* <ImageNotDraggable
           src={arrow}
           alt="arrow"
           className={`${styles.icon} ${isOpen && styles.open}`}
-        />
-      </div>
-      <div className={`${styles.list} ${isOpen && styles.listOpen}`}>
+        /> */}
+      </Link>
+      {/* <div className={`${styles.list} ${isOpen && styles.listOpen}`}>
         {game.services.map((service: Service) => (
           <Link
             href={`/service/${service._id}`}
@@ -41,7 +43,7 @@ const GameItem = ({ game, setIsOpenCatalog }: GameItemProps) => {
             <span className={styles.serviceTitle}>{service.name}</span>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

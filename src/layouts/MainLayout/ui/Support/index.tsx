@@ -53,6 +53,7 @@ const Support = () => {
           alt="support"
           className={styles.supportIcon}
         />
+        <span className={styles.btnText}>Отправьте нам сообщение!</span>
       </PrimaryBtn>
       <div className={`${styles.content} ${isOpen && styles.open}`}>
         <div className={styles.header}>

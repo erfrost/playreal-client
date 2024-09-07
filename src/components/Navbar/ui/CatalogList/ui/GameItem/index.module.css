@@ -121,3 +121,127 @@
     filter: brightness(200%);
   }
 }
+
+/* .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.name {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  padding: 5px 13px;
+}
+.container:first-child .name::before {
+  border-top-right-radius: 20px;
+}
+.container:last-child .name {
+  border: none;
+}
+.container:last-child .name::before {
+  border-bottom-right-radius: 20px;
+}
+.container:last-child .openName::before {
+  border-radius: 0;
+}
+.container:last-child .item:last-child {
+  border-bottom-right-radius: 20px;
+}
+.name::before,
+.openName::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(88.99deg, #0069e4 -2.64%, #cc61ff 105.07%);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.openName::before {
+  opacity: 1;
+}
+.openName .title {
+  color: white;
+}
+.openName .icon {
+  filter: brightness(200%);
+}
+.name:hover::before {
+  opacity: 1;
+}
+.name:hover .title {
+  color: white;
+}
+.name:hover .icon {
+  filter: brightness(200%);
+}
+.title,
+.serviceTitle {
+  color: black;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+.title {
+  font-weight: 700;
+}
+.serviceTitle {
+  font-weight: 500;
+}
+.icon {
+  transition: all 0.3s ease;
+}
+.open {
+  transform: rotate(180deg);
+}
+.list {
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.listOpen {
+  height: auto;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+.item {
+  padding: 2px 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.item:hover {
+  background-color: #d9d9d9;
+}
+
+@media screen and (max-width: 825px) {
+  .name:hover::before {
+    opacity: 0;
+  }
+  .name:hover .title {
+    color: black;
+  }
+  .name:hover .icon {
+    filter: none;
+  }
+  .openName:hover::before {
+    opacity: 1;
+  }
+  .openName:hover .title {
+    color: white;
+  }
+  .openName:hover .icon {
+    filter: brightness(200%);
+  }
+} */

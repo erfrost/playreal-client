@@ -1,0 +1,19 @@
+.container {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom-right-radius: 30px;
+  opacity: 1;
+  transition: all 75ms ease;
+}
+.container:hover .icon {
+  opacity: 0.75;
+}
+.icon {
+  aspect-ratio: 1;
+  width: 60%;
+  transition: all 0.2s ease;
+}

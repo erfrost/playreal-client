@@ -15,6 +15,9 @@ import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
 import { toastError, toastSuccess, toastWarning } from "@/lib/toastifyActions";
 import axiosInstance from "axios.config";
 import { deleteCookie, setCookie } from "cookies-next";
+import createOffer from "@/api/offers/createOffer";
+import { AxiosResponse } from "axios";
+import { Offer } from "@/models/Offer.model";
 
 const CartButtonWithSlider = () => {
   const [cart, setCart] = useRecoilState<CartItem[]>(cartState);
@@ -70,19 +73,13 @@ const CartButtonWithSlider = () => {
   const onCreateOffer = async () => {
     if (!cart.length) return toastWarning("Корзина пуста");
 
-    try {
-      await axiosInstance.post("offers/create", {
-        services: cart,
-      });
+    const offers: Offer[] = await createOffer(cart);
 
-      setCart([]);
-      deleteCookie("cart");
-      toastSuccess("Успешно");
-    } catch (error: any) {
-      toastError(
-        error?.response?.data?.message || "При создании заказа произошла ошибка"
-      );
-    }
+    if (!offers) return;
+
+    setCart([]);
+    deleteCookie("cart");
+    toastSuccess("Успешно");
   };
 
   return (

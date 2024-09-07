@@ -14,7 +14,7 @@ interface ProfileOfferProps {
 const ProfileOffer = ({ offer, user }: ProfileOfferProps) => {
   const [offerState, setOfferState] = useState<Offer>(offer);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  console.log(offer);
+
   return (
     <div className={styles.container} onClick={() => setIsOpen(true)}>
       <div className={styles.block}>

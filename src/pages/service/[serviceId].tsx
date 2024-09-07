@@ -41,7 +41,7 @@ const ServiceOffer = ({
       setRole(await getRole());
     })();
   }, []);
-  console.log(boosters);
+
   if (!service || !game || !additionalServices) return null;
 
   return (

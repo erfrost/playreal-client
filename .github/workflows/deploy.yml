@@ -29,4 +29,4 @@ jobs:
               docker rm "$CONTAINER_ID" || true; 
             fi &&
             docker build -t client . || true &&
-            docker run -d -p 3000:3000 --name client client
+            docker run -d --name client -p 3000:3000 --name client client

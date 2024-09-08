@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "git add . && git commit -m 'deploy' && git push origin main",
     "start": "next start",
     "lint": "next lint"
   },

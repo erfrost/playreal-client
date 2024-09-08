@@ -1,7 +1,0 @@
-            cd /root/client && git pull origin main &&
-            (docker stop client || true) && 
-            (docker rm client || true) &&
-            docker build -t client . ||
-            true &&
-            docker run -d -p 3000:3000 --name client --restart always client &&
-            docker image prune --filter="dangling=true" -f

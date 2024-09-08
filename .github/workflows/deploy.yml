@@ -22,17 +22,28 @@ jobs:
           port: 22
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            if [ ! -d "/root/сlient" ]; then 
+              echo "Directory /root/client does not exist. Cloning repository..."
+              git clone https://github.com/erfrost/playreal-client.git /root/client 
+            fi
+
             cd /root/client && git pull origin main &&
+
             CONTAINER_ID=$(docker ps -q --filter "name=client") &&
+
             if [ ! -z "$CONTAINER_ID" ]; then 
               echo "Stopping existing container..." &&
               docker stop "$CONTAINER_ID" || true; 
+
               echo "Removing existing container..." &&
               docker rm "$CONTAINER_ID" || true; 
             fi &&  
+
             echo "Building new Docker image..." &&
             docker build -t client . || true &&  
+
             echo "Running new Docker container..." &&
             docker run -d --name client -p 3000:3000 client &&  
-            echo "Cleaning up dangling images..." &&
+
+             echo "Cleaning up dangling images..." &&
              docker image prune --filter="dangling=true" -f

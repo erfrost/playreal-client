@@ -25,8 +25,14 @@ jobs:
             cd /root/client && git pull origin main &&
             CONTAINER_ID=$(docker ps -q --filter "name=client") &&
             if [ ! -z "$CONTAINER_ID" ]; then 
+              echo "Stopping existing container..." &&
               docker stop "$CONTAINER_ID" || true; 
+              echo "Removing existing container..." &&
               docker rm "$CONTAINER_ID" || true; 
-            fi &&
-            docker build -t client . || true &&
-            docker run -d --name client -p 3000:3000 --name client client
+            fi &&  
+            echo "Building new Docker image..." &&
+            docker build -t client . || true &&  
+            echo "Running new Docker container..." &&
+            docker run -d --name client -p 3000:3000 client &&  
+            echo "Cleaning up dangling images..." &&
+             docker image prune --filter="dangling=true" -f

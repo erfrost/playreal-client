@@ -33,13 +33,35 @@ const ChatArea = ({ recipient, messages, isLoading }: ChatAreaProps) => {
 
   // что бы скроллилось и не ломалось
   useEffect(() => {
+    const chatWindow: HTMLDivElement | null = document.querySelector(
+      ".ChatWindow_container__cgPH7"
+    );
+    const chatHeader: HTMLDivElement | null = document.querySelector(
+      ".ChatWindow_header__BP5LY"
+    );
     const chatArea: HTMLDivElement | null = document.querySelector(
       ".ChatArea_container__Eg0_Y"
+    );
+    const chatInputs: HTMLDivElement | null = document.querySelector(
+      ".ChatInput_container__yb2JR"
     );
     const messagesContainer: HTMLDivElement | null = document.querySelector(
       ".ChatArea_content__nL6XR"
     );
-    if (!chatArea || !messagesContainer) return;
+    if (
+      !chatWindow ||
+      !chatArea ||
+      !chatHeader ||
+      !chatInputs ||
+      !messagesContainer
+    )
+      return;
+
+    chatArea.style.maxHeight =
+      chatWindow.clientHeight -
+      chatHeader.clientHeight -
+      chatInputs.clientHeight +
+      "px";
 
     const areaHeight: number = chatArea.clientHeight;
 

@@ -19,6 +19,9 @@
 .combinedFilesContainer {
   background-color: #efccff !important;
 }
+.combinedFilesContainer .files {
+  background-color: transparent !important;
+}
 .files {
   display: flex;
   flex-direction: row;

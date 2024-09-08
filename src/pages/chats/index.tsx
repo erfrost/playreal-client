@@ -11,6 +11,7 @@ import { Message } from "@/models/Message.model";
 import { Socket, io } from "socket.io-client";
 import { NextRouter, useRouter } from "next/router";
 import { BASE_SOCKET_URL } from "environments";
+import { Files } from "lucide-react";
 
 interface OnlineStatusPayload {
   userId: string;
@@ -67,7 +68,12 @@ const Chats = () => {
     toastError(error);
   };
   const handleMessage = (message: Message) => {
-    if (currentChat && message.chatId === currentChat._id) {
+    if (
+      currentChat &&
+      message.chatId === currentChat._id &&
+      (message.text || message.files.length)
+    ) {
+      console.log("yjdjt сообщения: ", message.text, message.files);
       setCurrentChatMessages((prevState: Message[]) => [...prevState, message]);
     }
     setChats((prevState: Chat[]) => {
@@ -86,7 +92,7 @@ const Chats = () => {
           ? `Файлы: ${message.files.length} шт.`
           : "Ничего",
         unreadMessagesCount:
-          message.senderId === userId
+          currentChat?._id === arr[currentChatIndex]._id
             ? arr[currentChatIndex].unreadMessagesCount
             : (arr[currentChatIndex].unreadMessagesCount ?? 0) + 1,
       };

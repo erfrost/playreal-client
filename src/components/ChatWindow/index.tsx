@@ -28,7 +28,10 @@ const ChatWindow = ({
   useEffect(() => {
     setMessages((prevState: Message[]) => [
       ...prevState,
-      ...currentChatMessages,
+      ...currentChatMessages.filter(
+        (message: Message) =>
+          !prevState.some((existingMsg) => existingMsg._id === message._id)
+      ),
     ]);
   }, [currentChatMessages]);
 

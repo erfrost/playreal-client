@@ -8,9 +8,9 @@ import { Additional } from "@/models/Service.model";
 import PrimaryBtn from "@/components/PrimaryBtn";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import acceptOffer from "@/api/offers/acceptOffer";
-import { toastSuccess } from "@/lib/toastifyActions";
 import Status from "../Status";
 import { NextRouter, useRouter } from "next/router";
+import getChatId from "@/api/chats/getChatId";
 
 interface ModalProps {
   offer: Offer;
@@ -35,17 +35,25 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
     return () => overlayRef.current?.removeEventListener("click", onClose);
   }, [overlayRef]);
 
+  useEffect(() => {
+    (async () => {
+      if (!offer.boosterId) return;
+      setChatId(await getChatId(offer.boosterId));
+    })();
+  }, [offer]);
+
   const onClickBtn = async () => {
     if (offer.status === "Pending") {
       try {
         const { offer: acceptedOffer, chatId } = await acceptOffer(offer);
-
+        console.log(acceptedOffer, chatId);
         setOffer(acceptedOffer);
         setChatId(chatId);
       } catch {
         return;
       }
     } else {
+      console.log(chatId);
       if (chatId) router.push(`/chats?chatId=${chatId}`);
     }
   };

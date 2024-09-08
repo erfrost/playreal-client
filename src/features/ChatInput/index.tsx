@@ -17,7 +17,7 @@ const ChatInput = ({ socket, recipientId }: ChatInputProps) => {
     <div className={styles.container}>
       <FilesUpload socket={socket} recipientId={recipientId} />
       <TextInput value={text} setValue={setText} />
-      <VoiceInput />
+      {/* <VoiceInput /> */}
       <SendBtn
         socket={socket}
         recipientId={recipientId}

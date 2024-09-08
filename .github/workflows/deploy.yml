@@ -1,0 +1,31 @@
+name: Build and deploy to server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    name: Create docker image and push to registry, then start image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull image and run container with .env variables from secrets
+        uses: appleboy/ssh-action@v0.1.6
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        with:
+          host: 147.45.168.75
+          username: root
+          port: 22
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /root/client && git pull origin main &&
+            (docker stop client || true) && 
+            (docker rm client || true) &&
+            docker build -t client . ||
+            true &&
+            docker run -d -p 3000:3000 --name client --restart always client &&
+            docker image prune --filter="dangling=true" -f

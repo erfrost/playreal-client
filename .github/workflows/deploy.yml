@@ -23,7 +23,10 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd /root/client && git pull origin main &&
-            (docker stop client || true) &&
-            (docker rm client || true) &&
+            CONTAINER_ID=$(docker ps -q --filter "name=client") &&
+            if [ ! -z "$CONTAINER_ID" ]; then 
+              docker stop "$CONTAINER_ID" || true; 
+              docker rm "$CONTAINER_ID" || true; 
+            fi &&
             docker build -t client . || true &&
-            docker run -d -p 3000:3000 client
+            docker run -d -p 3000:3000 --name client client

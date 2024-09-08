@@ -6,6 +6,7 @@ import { useStopwatch } from "react-timer-hook";
 import uploadAudio from "@/api/files/uploadAudio";
 import { Socket, io } from "socket.io-client";
 import getUserId from "@/api/users/getUserId";
+import { BASE_SOCKET_URL } from "environments";
 
 const VoiceInput = () => {
   const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -17,13 +18,13 @@ const VoiceInput = () => {
   });
   const [socket, setSocket] = useState<Socket | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const userId: string = await getUserId();
+  // useEffect(() => {
+  //   (async () => {
+  //     const userId: string = await getUserId();
 
-      setSocket(io(`http://localhost:8000?userId=${userId}`));
-    })();
-  }, []);
+  //     setSocket(io(`${BASE_SOCKET_URL}?userId=${userId}`));
+  //   })();
+  // }, []);
 
   // useEffect(() => {
   //   if (!socket) return;

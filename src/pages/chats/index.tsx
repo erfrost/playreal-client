@@ -10,6 +10,7 @@ import { toastError } from "@/lib/toastifyActions";
 import { Message } from "@/models/Message.model";
 import { Socket, io } from "socket.io-client";
 import { NextRouter, useRouter } from "next/router";
+import { BASE_SOCKET_URL } from "environments";
 
 interface OnlineStatusPayload {
   userId: string;
@@ -33,7 +34,7 @@ const Chats = () => {
       if (!userId) {
         return toastError("При загрузке чатов произошла ошибка");
       }
-      setSocket(io(`http://localhost:8000?userId=${userId}`));
+      setSocket(io(`${BASE_SOCKET_URL}?userId=${userId}`));
 
       const chats: Chat[] = await getChats();
       if (!chats) return;

@@ -7,6 +7,7 @@ import uploadAudio from "@/api/files/uploadAudio";
 import { Socket, io } from "socket.io-client";
 import getUserId from "@/api/users/getUserId";
 import { BASE_SOCKET_URL } from "environments";
+import { toastError } from "@/lib/toastifyActions";
 
 const VoiceInput = () => {
   const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -39,6 +40,11 @@ const VoiceInput = () => {
   // }, [socket]);
 
   useEffect(() => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia()) {
+      toastError("Какая-то ошибка getUserMedia");
+      return;
+    }
+
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
       const newMediaRecorder: MediaRecorder | null = new MediaRecorder(stream);
 

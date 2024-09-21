@@ -38,7 +38,7 @@ const Chats = () => {
 
       const chats: Chat[] = await getChats();
       if (!chats) return;
-
+      //
       setChats(chats);
 
       if (chatId) {

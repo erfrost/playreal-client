@@ -6,7 +6,6 @@ import { useStopwatch } from "react-timer-hook";
 import uploadAudio from "@/api/files/uploadAudio";
 import { Socket, io } from "socket.io-client";
 import getUserId from "@/api/users/getUserId";
-import { BASE_SOCKET_URL } from "environments";
 import { toastError } from "@/lib/toastifyActions";
 
 const VoiceInput = () => {
@@ -19,96 +18,96 @@ const VoiceInput = () => {
   });
   const [socket, setSocket] = useState<Socket | null>(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const userId: string = await getUserId();
+  useEffect(() => {
+    (async () => {
+      const userId: string = await getUserId();
 
-  //     setSocket(io(`${BASE_SOCKET_URL}?userId=${userId}`));
-  //   })();
-  // }, []);
+      setSocket(io(`${BASE_SOCKET_URL}?userId=${userId}`));
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   if (!socket) return;
+  useEffect(() => {
+    if (!socket) return;
 
-  //   socket.on("connect", () => console.log("connect"));
-  //   socket.on("disconnect", () => console.log("disconnect"));
+    socket.on("connect", () => console.log("connect"));
+    socket.on("disconnect", () => console.log("disconnect"));
 
-  //   return () => {
-  //     socket.off("connect", () => console.log("connect"));
-  //     socket.off("disconnect", () => console.log("disconnect"));
-  //   };
-  // }, [socket]);
+    return () => {
+      socket.off("connect", () => console.log("connect"));
+      socket.off("disconnect", () => console.log("disconnect"));
+    };
+  }, [socket]);
 
-  // useEffect(() => {
-  //   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia()) {
-  //     toastError("Какая-то ошибка getUserMedia");
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!navigator.mediaDevices) {
+      toastError("Какая-то ошибка getUserMedia");
+      return;
+    }
 
-  //   navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-  //     const newMediaRecorder: MediaRecorder | null = new MediaRecorder(stream);
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      const newMediaRecorder: MediaRecorder | null = new MediaRecorder(stream);
 
-  //     setMediaRecorder(newMediaRecorder);
-  //   });
-  // }, []);
+      setMediaRecorder(newMediaRecorder);
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   if (!mediaRecorder) return;
-  //   mediaRecorder.addEventListener("dataavailable", async (e: BlobEvent) => {
-  //     const newAudio: string = await uploadAudio(e.data);
+  useEffect(() => {
+    if (!mediaRecorder) return;
+    mediaRecorder.addEventListener("dataavailable", async (e: BlobEvent) => {
+      const newAudio: string = await uploadAudio(e.data);
 
-  //     if (!socket) return;
-  //     socket.emit("message", { text: null, images: null, audio: newAudio });
-  //   });
-  // }, [mediaRecorder]);
+      if (!socket) return;
+      socket.emit("message", { text: null, images: null, audio: newAudio });
+    });
+  }, [mediaRecorder]);
 
-  // const onStart = (timer: HTMLDivElement) => {
-  //   if (!mediaRecorder) return;
-  //   mediaRecorder.start();
-  //   start();
-  //   timer.style.display = "block";
+  const onStart = (timer: HTMLDivElement) => {
+    if (!mediaRecorder) return;
+    mediaRecorder.start();
+    start();
+    timer.style.display = "block";
 
-  //   setTimeout(() => (timer.style.opacity = "1"), 0);
+    setTimeout(() => (timer.style.opacity = "1"), 0);
 
-  //   document.addEventListener("mouseup", () => onStop(timer));
-  // };
+    document.addEventListener("mouseup", () => onStop(timer));
+  };
 
-  // const onStop = (timer: HTMLDivElement) => {
-  //   if (!mediaRecorder) return;
-  //   mediaRecorder.stop();
-  //   timer.style.opacity = "0";
+  const onStop = (timer: HTMLDivElement) => {
+    if (!mediaRecorder) return;
+    mediaRecorder.stop();
+    timer.style.opacity = "0";
 
-  //   setTimeout(() => {
-  //     timer.style.display = "none";
-  //     reset();
-  //   }, 300);
+    setTimeout(() => {
+      timer.style.display = "none";
+      reset();
+    }, 300);
 
-  //   document.removeEventListener("mouseup", () => onStop(timer));
-  // };
+    document.removeEventListener("mouseup", () => onStop(timer));
+  };
 
-  // useEffect(() => {
-  //   const timer: HTMLDivElement | null = document.getElementById(
-  //     "timer"
-  //   ) as HTMLDivElement | null;
-  //   if (!timer) return;
+  useEffect(() => {
+    const timer: HTMLDivElement | null = document.getElementById(
+      "timer"
+    ) as HTMLDivElement | null;
+    if (!timer) return;
 
-  //   if (isStarted) onStart(timer);
-  // }, [isStarted]);
+    if (isStarted) onStart(timer);
+  }, [isStarted]);
 
   return (
     <div
       className={styles.container}
-      // onMouseDown={() => setIsStarted(true)}
-      // onMouseUp={() => setIsStarted(false)}
+      onMouseDown={() => setIsStarted(true)}
+      onMouseUp={() => setIsStarted(false)}
     >
-      {/* <div className={styles.timerContainer} id="timer">
+      <div className={styles.timerContainer} id="timer">
         <span className={styles.timerContent}>
           <div className={styles.circle}></div>
           {minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")}
         </span>
       </div>
-      <ImageNotDraggable src={icon} alt="voiceIcon" className={styles.icon} /> */}
+      <ImageNotDraggable src={icon} alt="voiceIcon" className={styles.icon} />
     </div>
   );
 };

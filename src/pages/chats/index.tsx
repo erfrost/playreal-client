@@ -10,7 +10,6 @@ import { toastError } from "@/lib/toastifyActions";
 import { Message } from "@/models/Message.model";
 import { Socket, io } from "socket.io-client";
 import { NextRouter, useRouter } from "next/router";
-import { BASE_SOCKET_URL } from "environments";
 import { Files } from "lucide-react";
 
 interface OnlineStatusPayload {
@@ -35,7 +34,7 @@ const Chats = () => {
       if (!userId) {
         return toastError("При загрузке чатов произошла ошибка");
       }
-      setSocket(io(`${BASE_SOCKET_URL}?userId=${userId}`));
+      setSocket(io(`${process.env.BASE_SOCKET_URL}?userId=${userId}`));
 
       const chats: Chat[] = await getChats();
       if (!chats) return;

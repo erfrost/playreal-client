@@ -7,6 +7,21 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>PlayReal</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="Мы занимаемся более 10 лет бустингом во всех популярных играх и даём
+            гарантию буста"
+        />
+        <meta name="keywords" content="ключевые, слова, для, вашего, сайта" />
+        <meta name="author" content="PlayReal" />
+        <meta property="og:title" content="PlayReal | Главная" />
+        <meta
+          property="og:description"
+          content="Мы занимаемся более 10 лет бустингом во всех популярных играх и даём
+          гарантию буста"
+        />
+        <meta property="og:image" content="/serviceBackground.png" />
       </Head>
       <MainLayout>
         <Component {...pageProps} />

@@ -2,10 +2,9 @@ import updateToken from "@/api/tokens/updateToken";
 import { toastError } from "@/lib/toastifyActions";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { BASE_URL } from "environments";
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: process.env.BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

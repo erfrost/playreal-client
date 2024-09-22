@@ -15,10 +15,10 @@ const nextConfig = {
   },
   //
   env: {
-    // BASE_URL: "http://147.45.168.75:8000/api/",
-    // BASE_SOCKET_URL: "http://147.45.168.75:8000",
-    BASE_URL: "http://localhost:8000/api/",
-    BASE_SOCKET_URL: "http://localhost:8000",
+    BASE_URL: "http://147.45.168.75:8000/api/",
+    BASE_SOCKET_URL: "http://147.45.168.75:8000",
+    // BASE_URL: "http://localhost:8000/api/",
+    // BASE_SOCKET_URL: "http://localhost:8000",
   },
 };
 

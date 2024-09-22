@@ -12,12 +12,11 @@ import { useRecoilState } from "recoil";
 import { cartState } from "@/storage/atoms";
 import getCartItemPrice from "@/api/services/getCartItemPrice";
 import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
-import { toastError, toastSuccess, toastWarning } from "@/lib/toastifyActions";
-import axiosInstance from "axios.config";
-import { deleteCookie, setCookie } from "cookies-next";
+import { toastSuccess, toastWarning } from "@/lib/toastifyActions";
+import { deleteCookie } from "cookies-next";
 import createOffer from "@/api/offers/createOffer";
-import { AxiosResponse } from "axios";
 import { Offer } from "@/models/Offer.model";
+import payment from "@/api/payment/payment";
 
 const CartButtonWithSlider = () => {
   const [cart, setCart] = useRecoilState<CartItem[]>(cartState);
@@ -73,12 +72,13 @@ const CartButtonWithSlider = () => {
   const onCreateOffer = async () => {
     if (!cart.length) return toastWarning("Корзина пуста");
 
-    const offers: Offer[] = await createOffer(cart);
+    // const offers: Offer[] = await createOffer(cart);
+    const res = await payment(cart);
+    console.log("response: ", res);
+    // if (!offers) return;
 
-    if (!offers) return;
-
-    setCart([]);
-    deleteCookie("cart");
+    // setCart([]);
+    // deleteCookie("cart");
     toastSuccess("Успешно");
   };
 

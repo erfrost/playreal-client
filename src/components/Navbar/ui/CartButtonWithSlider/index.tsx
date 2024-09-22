@@ -12,14 +12,17 @@ import { useRecoilState } from "recoil";
 import { cartState } from "@/storage/atoms";
 import getCartItemPrice from "@/api/services/getCartItemPrice";
 import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
-import { toastSuccess, toastWarning } from "@/lib/toastifyActions";
+import { toastError, toastSuccess, toastWarning } from "@/lib/toastifyActions";
 import payment from "@/api/payment/payment";
+import { deleteCookie } from "cookies-next";
+import { NextRouter, useRouter } from "next/router";
 
 const CartButtonWithSlider = () => {
   const [cart, setCart] = useRecoilState<CartItem[]>(cartState);
   const [cartWithPrice, setCartWithPrice] = useState<CartItemWithPrice[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const router: NextRouter = useRouter();
 
   useEffect(() => {
     setCart(getCart());
@@ -72,13 +75,13 @@ const CartButtonWithSlider = () => {
   const onCreateOffer = async () => {
     if (!cart.length) return toastWarning("Корзина пуста");
 
-    // const offers: Offer[] = await createOffer(cart);
-    const res = await payment(cart);
-    // if (!offers) return;
+    const paymentUrl: string = await payment(cart);
+    if (!paymentUrl) return toastError("Произошла ошибка при оплате");
 
-    // setCart([]);
-    // deleteCookie("cart");
-    toastSuccess("Успешно");
+    setCart([]);
+    deleteCookie("cart");
+
+    router.push(paymentUrl);
   };
 
   return (

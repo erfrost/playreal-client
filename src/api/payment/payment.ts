@@ -9,7 +9,7 @@ const payment = async (cartItems: CartItem[]) => {
       items: cartItems,
     });
 
-    return res.data;
+    return res.data.payment_url;
   } catch (error: any) {
     toastError(
       error?.response?.data?.message || "При оплате заказа произошла ошибка"

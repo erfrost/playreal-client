@@ -14,7 +14,6 @@ import { Requirement, Service, ServiceInfo } from "@/models/Service.model";
 import { useEffect, useState } from "react";
 import { toastError } from "@/lib/toastifyActions";
 import { GameInfo } from "@/models/Game.model";
-import CustomOfferBlock from "@/components/CustomOfferBlock";
 import Link from "next/link";
 import getRole from "@/api/users/getRole";
 import { Booster } from "@/models/User.model";
@@ -93,11 +92,6 @@ const ServiceOffer = ({
             <h4 className={styles.h4}>Изображения</h4>
             <ImagesSlider images={service.images} />
           </div>
-          {(!role || role === "user") && (
-            <div className={styles.block}>
-              <CustomOfferBlock />
-            </div>
-          )}
           <div className={styles.block}>
             <h3 className={styles.h3}>Требования</h3>
             <span className={styles.defaultText}>

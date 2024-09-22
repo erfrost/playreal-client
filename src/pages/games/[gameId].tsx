@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/services.module.css";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import ServiceItem from "@/components/ServiceItem";
@@ -9,6 +9,8 @@ import { toastError } from "@/lib/toastifyActions";
 import { Game, GameInfo } from "@/models/Game.model";
 import { ServiceInfo } from "@/models/Service.model";
 import { GetStaticProps } from "next";
+import CustomOfferBlock from "@/components/CustomOfferBlock";
+import getRole from "@/api/users/getRole";
 
 interface ServicesProps {
   game: Game | undefined;
@@ -16,6 +18,14 @@ interface ServicesProps {
   error: string | undefined;
 }
 const Services = ({ game, services, error }: ServicesProps) => {
+  const [role, setRole] = useState<"user" | "booster" | undefined>(undefined);
+
+  useEffect(() => {
+    (async () => {
+      setRole(await getRole());
+    })();
+  }, []);
+
   useEffect(() => {
     if (error) toastError(error);
   }, []);
@@ -49,6 +59,7 @@ const Services = ({ game, services, error }: ServicesProps) => {
           ))}
         </div>
       </div>
+      {(!role || role === "user") && <CustomOfferBlock />}
       <Advantages />
     </div>
   );

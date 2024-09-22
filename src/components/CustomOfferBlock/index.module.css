@@ -1,11 +1,11 @@
 .container {
   height: 100px;
+  margin: 0 75px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 20px 35px;
-  /* background-color: rgb(61, 61, 61); */
   border-radius: 30px;
   background-image: url("/serviceOfferBackground.png");
   background-position: center center;
@@ -58,91 +58,38 @@
   border-radius: 10px;
 }
 
-@media screen and (max-width: 1300px) {
-  .timeContainer {
-    background-color: transparent;
-    padding: 0;
-  }
-  .timeTopText {
-    font-size: 14px;
-  }
-  .timeSmallText {
-    display: none;
-  }
-}
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 825px) {
   .container {
-    height: auto;
-  }
-  .content {
-    flex-direction: column-reverse;
-    gap: 5px;
-  }
-  .timeTopText {
-    font-size: 14px;
-  }
-  .btn {
-    height: auto;
-  }
-}
-@media screen and (max-width: 975px) {
-  .container {
-    padding: 20px;
-  }
-  .title {
-    font-size: 18px;
+    margin: 0 10px;
   }
 }
 @media screen and (max-width: 750px) {
   .container {
-    padding: 20px 35px;
-  }
-  .content {
-    flex-direction: row;
-    gap: 25px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .container {
-    padding: 20px;
-  }
-  .content {
-    flex-direction: row;
-    gap: 15px;
-  }
-}
-@media screen and (max-width: 550px) {
-  .content {
-    flex-direction: column-reverse;
-    gap: 5px;
-  }
-}
-@media screen and (max-width: 500px) {
-  .timeContainer {
-    display: none;
-  }
-}
-@media screen and (max-width: 450px) {
-  .title {
-    font-size: 14px;
-  }
-}
-@media screen and (max-width: 400px) {
-  .container {
+    height: auto;
     flex-direction: column;
-    gap: 25px;
-    padding: 20px;
+    gap: 20px;
+  }
+  .timeTopText {
+    font-size: 15px;
+    line-height: normal;
+  }
+  .timeSmallText {
+    font-size: 12px;
+    line-height: normal;
+  }
+}
+@media screen and (max-width: 575px) {
+  .container {
     background-size: 100% 100%;
   }
   .title {
-    font-size: 18px;
+    font-size: 17px;
+    line-height: normal;
   }
-}
-@media screen and (max-width: 335px) {
-  .container {
-    gap: 15px;
+  .timeContainer {
+    display: none;
   }
-  .title {
-    font-size: 15px;
+  .btn {
+    width: 150px;
   }
 }

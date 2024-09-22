@@ -9,4 +9,5 @@ export interface CartItem {
 
 export interface CartItemWithPrice extends CartItem {
   price: number;
+  name: string;
 }

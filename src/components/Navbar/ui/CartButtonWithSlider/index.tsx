@@ -13,9 +13,6 @@ import { cartState } from "@/storage/atoms";
 import getCartItemPrice from "@/api/services/getCartItemPrice";
 import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
 import { toastSuccess, toastWarning } from "@/lib/toastifyActions";
-import { deleteCookie } from "cookies-next";
-import createOffer from "@/api/offers/createOffer";
-import { Offer } from "@/models/Offer.model";
 import payment from "@/api/payment/payment";
 
 const CartButtonWithSlider = () => {
@@ -32,10 +29,13 @@ const CartButtonWithSlider = () => {
     (async () => {
       const cartWithPrice: CartItemWithPrice[] = await Promise.all(
         cart.map(async (cartItem: CartItem) => {
-          const price: number = await getCartItemPrice(cartItem);
+          const { price, name }: { price: number; name: string } =
+            await getCartItemPrice(cartItem);
+
           return {
             ...cartItem,
             price,
+            name,
           };
         })
       );
@@ -74,7 +74,6 @@ const CartButtonWithSlider = () => {
 
     // const offers: Offer[] = await createOffer(cart);
     const res = await payment(cart);
-    console.log("response: ", res);
     // if (!offers) return;
 
     // setCart([]);

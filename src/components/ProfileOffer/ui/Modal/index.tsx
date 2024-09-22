@@ -46,14 +46,13 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
     if (offer.status === "Pending") {
       try {
         const { offer: acceptedOffer, chatId } = await acceptOffer(offer);
-        console.log(acceptedOffer, chatId);
+
         setOffer(acceptedOffer);
         setChatId(chatId);
       } catch {
         return;
       }
     } else {
-      console.log(chatId);
       if (chatId) router.push(`/chats?chatId=${chatId}`);
     }
   };

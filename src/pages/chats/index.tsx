@@ -72,7 +72,6 @@ const Chats = () => {
       message.chatId === currentChat._id &&
       (message.text || message.files.length)
     ) {
-      console.log("yjdjt сообщения: ", message.text, message.files);
       setCurrentChatMessages((prevState: Message[]) => [...prevState, message]);
     }
     setChats((prevState: Chat[]) => {

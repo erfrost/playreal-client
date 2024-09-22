@@ -12,7 +12,7 @@ const getCartItemPrice = async (service: CartItem) => {
       }
     );
 
-    return res.data.price;
+    return res.data;
   } catch (error: any) {
     toastError(
       error?.response?.data?.message ||

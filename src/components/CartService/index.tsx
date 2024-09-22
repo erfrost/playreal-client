@@ -13,7 +13,7 @@ interface CartServiceProps {
 }
 const CartService = ({ service, setCart }: CartServiceProps) => {
   const [isRemoveOpen, setIsRemoveOpen] = useState<boolean>(false);
-
+  console.log("service: ", service);
   return (
     <div className={styles.container}>
       {isRemoveOpen && (
@@ -32,9 +32,7 @@ const CartService = ({ service, setCart }: CartServiceProps) => {
       />
       <div className={styles.content}>
         <div className={styles.params}>
-          <span className={styles.title}>
-            Аберрус Темное Горнило Героик Буст
-          </span>
+          <span className={styles.title}>{service.name}</span>
           <span className={styles.rating}>
             Рейтинг: {service.ratingRange[0] + " - " + service.ratingRange[1]}
           </span>

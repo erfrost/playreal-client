@@ -11,6 +11,8 @@ import acceptOffer from "@/api/offers/acceptOffer";
 import Status from "../Status";
 import { NextRouter, useRouter } from "next/router";
 import getChatId from "@/api/chats/getChatId";
+import completeBoosterOffer from "@/api/offers/completeBoosterOffer";
+import completeUserOffer from "@/api/offers/completeUserOffer";
 
 interface ModalProps {
   offer: Offer;
@@ -55,6 +57,20 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
     } else {
       if (chatId) router.push(`/chats?chatId=${chatId}`);
     }
+  };
+
+  const onCompleteBoosterOffer = async () => {
+    if (offer.status !== "AtWork") return;
+
+    const completedOffer: Offer = await completeBoosterOffer(offer);
+    setOffer(completedOffer);
+  };
+
+  const onCompleteUserOffer = async () => {
+    if (offer.status !== "Review") return;
+
+    const completedOffer: Offer = await completeUserOffer(offer);
+    setOffer(completedOffer);
   };
 
   return (
@@ -134,11 +150,34 @@ const Modal = ({ offer, userId, setOffer, setIsOpen }: ModalProps) => {
         {offer.userId === userId && offer.status === "Pending" ? (
           <> </>
         ) : (
-          <PrimaryBtn className={styles.btn} onClick={onClickBtn}>
-            {offer.status !== "Pending" && offer.boosterId
-              ? "Перейти в чат"
-              : "Принять заказ"}
-          </PrimaryBtn>
+          <>
+            <PrimaryBtn className={styles.btn} onClick={onClickBtn}>
+              {offer.status !== "Pending" && offer.boosterId
+                ? "Перейти в чат"
+                : "Принять заказ"}
+            </PrimaryBtn>
+
+            {offer.status === "Review" &&
+              (offer.userId === userId ? (
+                <PrimaryBtn
+                  className={styles.btn}
+                  onClick={onCompleteUserOffer}
+                >
+                  Завершить заказ
+                </PrimaryBtn>
+              ) : (
+                <PrimaryBtn
+                  className={`${styles.btn} ${
+                    offer.status === "Review" && styles.disabledBtn
+                  }`}
+                  onClick={onCompleteBoosterOffer}
+                >
+                  {offer.status === "Review"
+                    ? "Ожидание принятия заказа"
+                    : "Завершить заказ"}
+                </PrimaryBtn>
+              ))}
+          </>
         )}
       </div>
     </div>

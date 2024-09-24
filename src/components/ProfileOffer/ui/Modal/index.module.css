@@ -89,10 +89,20 @@
   margin-left: 5px;
 }
 .btn {
-  margin-top: 25px;
-  border-radius: 30px;
+  border-radius: 16px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.btn:first-of-type {
+  margin-top: 20px;
+}
+.disabledBtn {
+  background-color: #cfb3de !important;
+  cursor: default;
+}
+.disabledBtn:hover {
+  opacity: 1 !important;
+  background-color: #cfb3de !important;
 }
 .priceTime {
   display: flex;

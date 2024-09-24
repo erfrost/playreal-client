@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { MessageCircle, Pencil, User } from "lucide-react";
+import { MessageCircle, Pencil, User, Wallet } from "lucide-react";
 import styles from "./index.module.css";
 import { UserInfo } from "@/models/User.model";
 import Link from "next/link";
@@ -55,6 +55,12 @@ const MenuWithButton = ({ logout, user }: MenuWithButtonProps) => {
             <DropdownMenuItem className={styles.menuBtn}>
               <MessageCircle color="#000000" size={16} />
               Chats
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/wallet">
+            <DropdownMenuItem className={styles.menuBtn}>
+              <Wallet color="#000000" size={16} />
+              Wallet
             </DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator className={styles.DropdownMenuSeparator} />

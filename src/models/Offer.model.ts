@@ -12,7 +12,7 @@ export interface Offer {
   serviceImage: string;
   ratingRange: number[];
   additionals: Additional[];
-  status: "Pending" | "AtWork" | "Already";
+  status: "Pending" | "AtWork" | "Review" | "Already";
   boosterId?: string;
   boosterName?: string;
   boosterAvatar?: string;

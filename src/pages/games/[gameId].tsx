@@ -11,6 +11,7 @@ import { ServiceInfo } from "@/models/Service.model";
 import { GetStaticProps } from "next";
 import CustomOfferBlock from "@/components/CustomOfferBlock";
 import getRole from "@/api/users/getRole";
+import ServicesPageSEO from "@/SEO/ServicesPageSEO";
 
 interface ServicesProps {
   game: Game | undefined;
@@ -33,35 +34,38 @@ const Services = ({ game, services, error }: ServicesProps) => {
   if (!game || !services) return null;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <BreadcrumbNav
-          routes={[
-            {
-              title: "Главная",
-              path: "/",
-            },
-            {
-              title: game.title,
-              path: `/games/${game._id}`,
-            },
-          ]}
-          theme="dark"
-        />
-        <h1 className={styles.title}>{game.title}</h1>
-        <h3 className={styles.subtitle}>{game.description}</h3>
-      </div>
-      <div className={styles.catalog}>
-        <h2 className={styles.catalogTitle}>Каталог</h2>
-        <div className={styles.catalogGrid}>
-          {services.map((service: ServiceInfo) => (
-            <ServiceItem key={service._id} service={service} />
-          ))}
+    <>
+      <ServicesPageSEO gameId={game._id} gameName={game.title} />
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <BreadcrumbNav
+            routes={[
+              {
+                title: "Главная",
+                path: "/",
+              },
+              {
+                title: game.title,
+                path: `/games/${game._id}`,
+              },
+            ]}
+            theme="dark"
+          />
+          <h1 className={styles.title}>{game.title}</h1>
+          <h3 className={styles.subtitle}>{game.description}</h3>
         </div>
+        <div className={styles.catalog}>
+          <h2 className={styles.catalogTitle}>Каталог</h2>
+          <div className={styles.catalogGrid}>
+            {services.map((service: ServiceInfo) => (
+              <ServiceItem key={service._id} service={service} />
+            ))}
+          </div>
+        </div>
+        {(!role || role === "user") && <CustomOfferBlock />}
+        <Advantages />
       </div>
-      {(!role || role === "user") && <CustomOfferBlock />}
-      <Advantages />
-    </div>
+    </>
   );
 };
 

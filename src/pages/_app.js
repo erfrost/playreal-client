@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }) {
           content="Мы занимаемся более 10 лет бустингом во всех популярных играх и даём
             гарантию буста"
         />
-        <meta name="keywords" content="ключевые, слова, для, вашего, сайта" />
         <meta name="author" content="PlayReal" />
         <meta property="og:title" content="PlayReal | Главная" />
         <meta
@@ -21,7 +20,7 @@ export default function App({ Component, pageProps }) {
           content="Мы занимаемся более 10 лет бустингом во всех популярных играх и даём
           гарантию буста"
         />
-        <meta property="og:image" content="/serviceBackground.png" />
+        <meta property="og:image" content="/logo.jpg" />
       </Head>
       <MainLayout>
         <Component {...pageProps} />

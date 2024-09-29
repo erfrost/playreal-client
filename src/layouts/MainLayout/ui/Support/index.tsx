@@ -134,7 +134,7 @@ const Support = () => {
           <ImageNotDraggable src={logo} alt="logo" className={styles.logo} />
         </div>
         <div className={styles.chatArea}>
-          {messages.length ? (
+          {messages?.length ? (
             <div className={styles.list}>
               {messages.map((message: SupportMessage) => (
                 <div

@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx", 
     "src/storage/index.js", 
-    "src/pages/_app.js"  ],
+    "src/pages/_app.js", "next-sitemap.config.js"  ],
   "exclude": [
     "node_modules"
   ]

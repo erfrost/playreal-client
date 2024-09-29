@@ -9,6 +9,7 @@ import { GetStaticProps } from "next";
 import { AxiosResponse } from "axios";
 import { toastError } from "@/lib/toastifyActions";
 import noAvatar from "public/noAvatar.png";
+import ProfilePageSEO from "@/SEO/ProfilePageSEO";
 
 interface BoosterProps {
   user: User | undefined;
@@ -19,156 +20,164 @@ const Booster = ({ user, error }: BoosterProps) => {
     if (error) toastError(error);
   });
 
+  if (!user) return null;
+
   return (
-    <div className={styles.container}>
-      {user && (
-        <>
-          <BreadcrumbNav
-            theme="dark"
-            routes={[
-              {
-                title: "Главная",
-                path: "/",
-              },
-              {
-                title: user.nickname,
-                path: `/booster/${user._id}`,
-              },
-            ]}
-          />
-          <div className={styles.content}>
-            <div className={styles.main}>
-              <ImageNotDraggable
-                src={user.avatar_url || noAvatar}
-                width={100}
-                height={100}
-                alt="avatar"
-                className={styles.avatar}
-              />
-              <div className={styles.mainContent}>
-                <div className={styles.mainStats}>
-                  <div className={styles.pinkBtn}>God of boosting</div>
-                  <div className={styles.ratingBtn}>
-                    <span className={styles.ratingBtnText}>4.8</span>
-                    <ImageNotDraggable
-                      src={star}
-                      alt="star"
-                      className={styles.star}
-                    />
+    <>
+      <ProfilePageSEO userId={user._id} userName={user.nickname} />
+      <div className={styles.container}>
+        {user && (
+          <>
+            <BreadcrumbNav
+              theme="dark"
+              routes={[
+                {
+                  title: "Главная",
+                  path: "/",
+                },
+                {
+                  title: user.nickname,
+                  path: `/booster/${user._id}`,
+                },
+              ]}
+            />
+            <div className={styles.content}>
+              <div className={styles.main}>
+                <ImageNotDraggable
+                  src={user.avatar_url || noAvatar}
+                  width={100}
+                  height={100}
+                  alt="avatar"
+                  className={styles.avatar}
+                />
+                <div className={styles.mainContent}>
+                  <div className={styles.mainStats}>
+                    <div className={styles.pinkBtn}>God of boosting</div>
+                    <div className={styles.ratingBtn}>
+                      <span className={styles.ratingBtnText}>4.8</span>
+                      <ImageNotDraggable
+                        src={star}
+                        alt="star"
+                        className={styles.star}
+                      />
+                    </div>
                   </div>
+                  <h1 className={styles.name}>{user.nickname}</h1>
                 </div>
-                <h1 className={styles.name}>{user.nickname}</h1>
               </div>
-            </div>
-            <div className={styles.info}>
-              <h3 className={styles.infoTitle}>Обо мне</h3>
-              <span className={styles.infoText}>
-                {user.description || "Пользователь не указал информации о себе"}
-              </span>
-            </div>
-            {user.role === "booster" && (
-              <>
-                <div className={styles.reviews}>
-                  <h4 className={styles.reviewsTitle}>Последние отзывы</h4>
-                  <div className={styles.reviewsList}>
-                    <div className={styles.reviewItem}>
-                      <span className={styles.reviewName}>{user.nickname}</span>
-                      <div className={styles.ratingStars}>
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
+              <div className={styles.info}>
+                <h3 className={styles.infoTitle}>Обо мне</h3>
+                <span className={styles.infoText}>
+                  {user.description ||
+                    "Пользователь не указал информации о себе"}
+                </span>
+              </div>
+              {user.role === "booster" && (
+                <>
+                  <div className={styles.reviews}>
+                    <h4 className={styles.reviewsTitle}>Последние отзывы</h4>
+                    <div className={styles.reviewsList}>
+                      <div className={styles.reviewItem}>
+                        <span className={styles.reviewName}>
+                          {user.nickname}
+                        </span>
+                        <div className={styles.ratingStars}>
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                        </div>
+                        <span className={styles.reviewText}>
+                          Обратился в эту компанию для повышения рейтинга в Dota
+                          2. Ребята справились на отлично, не зря потратил
+                          деньги. Теперь я в топе рейтинга
+                        </span>
                       </div>
-                      <span className={styles.reviewText}>
-                        Обратился в эту компанию для повышения рейтинга в Dota
-                        2. Ребята справились на отлично, не зря потратил деньги.
-                        Теперь я в топе рейтинга
+                      <div className={styles.reviewItem}>
+                        <span className={styles.reviewName}>Констатин</span>
+                        <div className={styles.ratingStars}>
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                          <ImageNotDraggable
+                            src={star}
+                            alt="star"
+                            className={styles.reviewStar}
+                          />
+                        </div>
+                        <span className={styles.reviewText}>
+                          Обратился в эту компанию для повышения рейтинга в Dota
+                          2. Ребята справились на отлично, не зря потратил
+                          деньги. Теперь я в топе рейтинга
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.experience}>
+                    <div className={styles.experienceItem}>
+                      <h2 className={styles.experienceBold}>102</h2>
+                      <span className={styles.experienceText}>
+                        Выполненных заказов
                       </span>
                     </div>
-                    <div className={styles.reviewItem}>
-                      <span className={styles.reviewName}>Констатин</span>
-                      <div className={styles.ratingStars}>
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                        <ImageNotDraggable
-                          src={star}
-                          alt="star"
-                          className={styles.reviewStar}
-                        />
-                      </div>
-                      <span className={styles.reviewText}>
-                        Обратился в эту компанию для повышения рейтинга в Dota
-                        2. Ребята справились на отлично, не зря потратил деньги.
-                        Теперь я в топе рейтинга
+                    <div className={styles.experienceItem}>
+                      <h2 className={styles.experienceBold}>34 месяца</h2>
+                      <span className={styles.experienceText}>
+                        Средний рейтинг бустера
+                      </span>
+                    </div>
+                    <div className={styles.experienceItem}>
+                      <h2 className={styles.experienceBold}>4.7</h2>
+                      <span className={styles.experienceText}>
+                        Средний рейтинг бустера
                       </span>
                     </div>
                   </div>
-                </div>
-                <div className={styles.experience}>
-                  <div className={styles.experienceItem}>
-                    <h2 className={styles.experienceBold}>102</h2>
-                    <span className={styles.experienceText}>
-                      Выполненных заказов
-                    </span>
-                  </div>
-                  <div className={styles.experienceItem}>
-                    <h2 className={styles.experienceBold}>34 месяца</h2>
-                    <span className={styles.experienceText}>
-                      Средний рейтинг бустера
-                    </span>
-                  </div>
-                  <div className={styles.experienceItem}>
-                    <h2 className={styles.experienceBold}>4.7</h2>
-                    <span className={styles.experienceText}>
-                      Средний рейтинг бустера
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </>
-      )}
-    </div>
+                </>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

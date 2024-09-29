@@ -19,6 +19,7 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { GameInfo } from "@/models/Game.model";
 import GamesSelect from "@/components/GamesSelect";
 import uploadImage from "@/api/files/uploadImage";
+import ProfileEditPageSEO from "@/SEO/ProfileEditPageSEO";
 
 interface Password {
   value: string;
@@ -101,118 +102,121 @@ const ProfileEdit = ({ user, games, error }: ProfileEditProps) => {
   if (!user) return;
 
   return (
-    <div className={styles.container}>
-      <BreadcrumbNav
-        theme="dark"
-        routes={[
-          {
-            title: "Главная",
-            path: "/",
-          },
-          {
-            title: "Профиль",
-            path: "/profile",
-          },
-          {
-            title: "Редактирование",
-            path: "/profile/edit",
-          },
-        ]}
-      />
-      <div className={styles.avatarContainer}>
-        <ImageNotDraggable
-          src={avatar || noAvatar}
-          width={100}
-          height={100}
-          alt="avatar"
-          className={styles.avatar}
+    <>
+      <ProfileEditPageSEO />
+      <div className={styles.container}>
+        <BreadcrumbNav
+          theme="dark"
+          routes={[
+            {
+              title: "Главная",
+              path: "/",
+            },
+            {
+              title: "Профиль",
+              path: "/profile",
+            },
+            {
+              title: "Редактирование",
+              path: "/profile/edit",
+            },
+          ]}
         />
-        <input
-          className={styles.avatarInput}
-          type="file"
-          onChange={onAvatarChange}
-        />
-      </div>
-      <input
-        className={styles.input}
-        placeholder="Никнейм"
-        value={nickname}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          const value: string = e.target.value;
-          const filteredValue: string = value.replace(
-            /[^a-zA-Zа-яА-Я0-9]/g,
-            ""
-          );
-          setNickname(filteredValue);
-        }}
-      />
-      <textarea
-        className={`${styles.input} ${styles.textarea}`}
-        placeholder="Расскажите о себе"
-        value={description}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-          setDescription(e.target.value)
-        }
-      />
-      {user.role === "booster" && games && (
-        <>
-          <span className={styles.text}>Игры</span>
-          <GamesSelect
-            games={games}
-            selectedGames={selectedGames}
-            setSelectedGames={setSelectedGames}
+        <div className={styles.avatarContainer}>
+          <ImageNotDraggable
+            src={avatar || noAvatar}
+            width={100}
+            height={100}
+            alt="avatar"
+            className={styles.avatar}
           />
-        </>
-      )}
-      <span className={styles.text}>Смена пароля</span>
-      <div className={styles.form}>
+          <input
+            className={styles.avatarInput}
+            type="file"
+            onChange={onAvatarChange}
+          />
+        </div>
         <input
-          className={`${styles.input} ${styles.passwordInput}`}
-          placeholder="Новый пароль"
-          type={password.isShow ? "text" : "password"}
-          value={password.value}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onPasswordChange(e.target.value, setPassword)
+          className={styles.input}
+          placeholder="Никнейм"
+          value={nickname}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            const value: string = e.target.value;
+            const filteredValue: string = value.replace(
+              /[^a-zA-Zа-яА-Я0-9]/g,
+              ""
+            );
+            setNickname(filteredValue);
+          }}
+        />
+        <textarea
+          className={`${styles.input} ${styles.textarea}`}
+          placeholder="Расскажите о себе"
+          value={description}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+            setDescription(e.target.value)
           }
         />
-        <ImageNotDraggable
-          src={password.isShow ? passwordShow : passwordHide}
-          alt="icon"
-          className={styles.passwordIcon}
-          onClick={() =>
-            setPassword((prevState: Password) => ({
-              ...prevState,
-              isShow: !prevState.isShow,
-            }))
-          }
-        />
+        {user.role === "booster" && games && (
+          <>
+            <span className={styles.text}>Игры</span>
+            <GamesSelect
+              games={games}
+              selectedGames={selectedGames}
+              setSelectedGames={setSelectedGames}
+            />
+          </>
+        )}
+        <span className={styles.text}>Смена пароля</span>
+        <div className={styles.form}>
+          <input
+            className={`${styles.input} ${styles.passwordInput}`}
+            placeholder="Новый пароль"
+            type={password.isShow ? "text" : "password"}
+            value={password.value}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onPasswordChange(e.target.value, setPassword)
+            }
+          />
+          <ImageNotDraggable
+            src={password.isShow ? passwordShow : passwordHide}
+            alt="icon"
+            className={styles.passwordIcon}
+            onClick={() =>
+              setPassword((prevState: Password) => ({
+                ...prevState,
+                isShow: !prevState.isShow,
+              }))
+            }
+          />
+        </div>
+        <div className={styles.form}>
+          <input
+            className={`${styles.input} ${styles.passwordInput}`}
+            placeholder="Повторите новый пароль"
+            type={repeatPassword.isShow ? "text" : "password"}
+            value={repeatPassword.value}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onPasswordChange(e.target.value, setRepeatPassword)
+            }
+          />
+          <ImageNotDraggable
+            src={repeatPassword.isShow ? passwordShow : passwordHide}
+            alt="icon"
+            className={styles.passwordIcon}
+            onClick={() =>
+              setRepeatPassword((prevState: Password) => ({
+                ...prevState,
+                isShow: !prevState.isShow,
+              }))
+            }
+          />
+        </div>
+        <button className={styles.btn} onClick={onSave}>
+          Сохранить изменения
+        </button>
       </div>
-      <div className={styles.form}>
-        <input
-          className={`${styles.input} ${styles.passwordInput}`}
-          placeholder="Повторите новый пароль"
-          type={repeatPassword.isShow ? "text" : "password"}
-          value={repeatPassword.value}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onPasswordChange(e.target.value, setRepeatPassword)
-          }
-        />
-        <ImageNotDraggable
-          src={repeatPassword.isShow ? passwordShow : passwordHide}
-          alt="icon"
-          className={styles.passwordIcon}
-          onClick={() =>
-            setRepeatPassword((prevState: Password) => ({
-              ...prevState,
-              isShow: !prevState.isShow,
-            }))
-          }
-        />
-      </div>
-      <button className={styles.btn} onClick={onSave}>
-        Сохранить изменения
-      </button>
-    </div>
+    </>
   );
 };
 

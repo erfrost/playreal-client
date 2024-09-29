@@ -17,6 +17,7 @@ import { GameInfo } from "@/models/Game.model";
 import Link from "next/link";
 import getRole from "@/api/users/getRole";
 import { Booster } from "@/models/User.model";
+import ServiceItemPageSEO from "@/SEO/ServiceItemPageSEO";
 
 interface ServiceProps {
   service: Service | undefined;
@@ -44,92 +45,100 @@ const ServiceOffer = ({
   if (!service || !game || !additionalServices) return null;
 
   return (
-    <div className={styles.container}>
-      <div
-        className={styles.header}
-        style={{ backgroundImage: `url(${service.backgroundHeader})` }}
-      >
-        <BreadcrumbNav
-          routes={[
-            {
-              title: "Главная",
-              path: "/",
-            },
-            {
-              title: game?.title,
-              path: `/games/${game._id}`,
-            },
-            {
-              title: service.name,
-              path: `/service/${service._id}`,
-            },
-          ]}
-          theme="white"
-        />
-        <h1 className={styles.title}>{service.name}</h1>
-        <div className={styles.statsGroup}>
-          <div className={styles.statBtn}>
-            <span className={styles.statBtnText}>4.8</span>
-            <ImageNotDraggable
-              src={starIcon}
-              alt="star"
-              style={{ alignSelf: "flex-start" }}
-            />
-          </div>
-          <Link href="https://www.trustpilot.com/" className={styles.statBtn}>
-            <span className={styles.statBtnText}>Trustpilot</span>
-            <ImageNotDraggable src={arrowIcon} alt="arrow" />
-          </Link>
-        </div>
-      </div>
-      <div className={styles.content}>
-        <div className={styles.info}>
-          <div className={styles.block}>
-            <h3 className={styles.h3}>Описание услуги</h3>
-            <span className={styles.defaultText}>{service.title}</span>
-          </div>
-          <div className={styles.block}>
-            <h4 className={styles.h4}>Изображения</h4>
-            <ImagesSlider images={service.images} />
-          </div>
-          <div className={styles.block}>
-            <h3 className={styles.h3}>Требования</h3>
-            <span className={styles.defaultText}>
-              {service.requirementsTitle}
-            </span>
-            {service.requirements.map((requirement: Requirement) => (
-              <Accordion key={requirement._id} requirement={requirement} />
-            ))}
+    <>
+      <ServiceItemPageSEO
+        serviceId={service._id}
+        serviceName={service.name}
+        serviceImage={service.backgroundCard}
+        gameName={game.title}
+      />
+      <div className={styles.container}>
+        <div
+          className={styles.header}
+          style={{ backgroundImage: `url(${service.backgroundHeader})` }}
+        >
+          <BreadcrumbNav
+            routes={[
+              {
+                title: "Главная",
+                path: "/",
+              },
+              {
+                title: game?.title,
+                path: `/games/${game._id}`,
+              },
+              {
+                title: service.name,
+                path: `/service/${service._id}`,
+              },
+            ]}
+            theme="white"
+          />
+          <h1 className={styles.title}>{service.name}</h1>
+          <div className={styles.statsGroup}>
+            <div className={styles.statBtn}>
+              <span className={styles.statBtnText}>4.8</span>
+              <ImageNotDraggable
+                src={starIcon}
+                alt="star"
+                style={{ alignSelf: "flex-start" }}
+              />
+            </div>
+            <Link href="https://www.trustpilot.com/" className={styles.statBtn}>
+              <span className={styles.statBtnText}>Trustpilot</span>
+              <ImageNotDraggable src={arrowIcon} alt="arrow" />
+            </Link>
           </div>
         </div>
-        <OfferCalculator service={service} role={role} />
-        {role !== "user" && boosters?.length && (
-          <div className={styles.footerBlock}>
-            <h2 className={styles.h2}>Выберите бустера</h2>
-            <span className={styles.boostersText}>
-              Наши бустеры - профессионалы своего дела со стажем от 3 лет. Они
-              знают все тонкости повышения рейтинга в разных играх. Доверьте
-              улучшение аккаунта настоящим экспертам!
-            </span>
-            <div className={styles.boostersList}>
-              {boosters.map((booster: Booster) => (
-                <BoosterCard booster={booster} key={booster._id} />
+        <div className={styles.content}>
+          <div className={styles.info}>
+            <div className={styles.block}>
+              <h3 className={styles.h3}>Описание услуги</h3>
+              <span className={styles.defaultText}>{service.title}</span>
+            </div>
+            <div className={styles.block}>
+              <h4 className={styles.h4}>Изображения</h4>
+              <ImagesSlider images={service.images} />
+            </div>
+            <div className={styles.block}>
+              <h3 className={styles.h3}>Требования</h3>
+              <span className={styles.defaultText}>
+                {service.requirementsTitle}
+              </span>
+              {service.requirements.map((requirement: Requirement) => (
+                <Accordion key={requirement._id} requirement={requirement} />
               ))}
             </div>
           </div>
-        )}
-        {additionalServices.length ? (
-          <div className={styles.footerBlock}>
-            <h2 className={styles.h2}>Вам может понравиться</h2>
-            <div className={styles.servicesList}>
-              {additionalServices.map((service: ServiceInfo) => (
-                <ServiceItem service={service} key={service._id} />
-              ))}
+          <OfferCalculator service={service} role={role} />
+          {role !== "user" && boosters?.length && (
+            <div className={styles.footerBlock}>
+              <h2 className={styles.h2}>Выберите бустера</h2>
+              <span className={styles.boostersText}>
+                Наши бустеры - профессионалы своего дела со стажем от 3 лет. Они
+                знают все тонкости повышения рейтинга в разных играх. Доверьте
+                улучшение аккаунта настоящим экспертам!
+              </span>
+              <div className={styles.boostersList}>
+                {boosters.map((booster: Booster) => (
+                  <BoosterCard booster={booster} key={booster._id} />
+                ))}
+              </div>
             </div>
-          </div>
-        ) : null}
+          )}
+          {additionalServices.length ? (
+            <div className={styles.footerBlock}>
+              <h2 className={styles.h2}>Вам может понравиться</h2>
+              <div className={styles.servicesList}>
+                {additionalServices.map((service: ServiceInfo) => (
+                  <ServiceItem service={service} key={service._id} />
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

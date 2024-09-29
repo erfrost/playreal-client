@@ -1,3 +1,4 @@
+import WalletPageSEO from "@/SEO/WalletPageSEO";
 import getAllPayment from "@/api/payment/getAllPayments";
 import getBalance from "@/api/users/getBalance";
 import getRole from "@/api/users/getRole";
@@ -23,25 +24,28 @@ const Wallet = () => {
   if (!payments) return null;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {role === "booster" && (
-          <div className={styles.balanceContainer}>
-            <div className={styles.circle}>
-              <WalletIcon color="white" />
+    <>
+      <WalletPageSEO />
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {role === "booster" && (
+            <div className={styles.balanceContainer}>
+              <div className={styles.circle}>
+                <WalletIcon color="white" />
+              </div>
+              <div className={styles.balanceContent}>
+                <span className={styles.balanceValue}>
+                  {balance ? balance.toLocaleString() : "0"} ₽
+                </span>
+                <button className={styles.btn}>Вывести</button>
+              </div>
             </div>
-            <div className={styles.balanceContent}>
-              <span className={styles.balanceValue}>
-                {balance ? balance.toLocaleString() : "0"} ₽
-              </span>
-              <button className={styles.btn}>Вывести</button>
-            </div>
-          </div>
-        )}
-        <span className={styles.tableTitle}>История операций</span>
-        <WalletTable payments={payments} />
+          )}
+          <span className={styles.tableTitle}>История операций</span>
+          <WalletTable payments={payments} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

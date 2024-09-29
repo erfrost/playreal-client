@@ -12,7 +12,7 @@ import ImageNotDraggable from "@/components/ui/ImageNotDraggable";
 import ProfileOffer from "@/components/ProfileOffer";
 import { User } from "@/models/User.model";
 import getProfile from "@/api/users/getProfile";
-import debounce from "@/lib/debouce";
+import OrdersPageSEO from "@/SEO/OrdersPageSEO";
 
 const Orders = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -66,59 +66,62 @@ const Orders = () => {
   }, [selectedGames]);
 
   return (
-    <div className={styles.container}>
-      <BreadcrumbNav
-        theme="dark"
-        routes={[
-          {
-            title: "Главная",
-            path: "/",
-          },
-          {
-            title: "Заказы",
-            path: "/orders",
-          },
-        ]}
-      />
-      {user && (
-        <div className={styles.content}>
-          <h1 className={styles.title}>Заказы</h1>
-          <div className={styles.filter}>
-            <PrimaryBtn
-              className={styles.toggle}
-              onClick={() =>
-                setIsOpenFilter((prevState: boolean) => !prevState)
-              }
-            >
-              <span className={styles.toggleText}>Фильтр по играм</span>
-              <ImageNotDraggable
-                src={arrow}
-                alt="arrow"
-                className={styles.arrow}
-              />
-            </PrimaryBtn>
-            {isOpenFilter && (
-              <div className={styles.filterContent} id="filter">
-                <GamesSelect
-                  games={games}
-                  selectedGames={selectedGames}
-                  setSelectedGames={setSelectedGames}
+    <>
+      <OrdersPageSEO />
+      <div className={styles.container}>
+        <BreadcrumbNav
+          theme="dark"
+          routes={[
+            {
+              title: "Главная",
+              path: "/",
+            },
+            {
+              title: "Заказы",
+              path: "/orders",
+            },
+          ]}
+        />
+        {user && (
+          <div className={styles.content}>
+            <h1 className={styles.title}>Заказы</h1>
+            <div className={styles.filter}>
+              <PrimaryBtn
+                className={styles.toggle}
+                onClick={() =>
+                  setIsOpenFilter((prevState: boolean) => !prevState)
+                }
+              >
+                <span className={styles.toggleText}>Фильтр по играм</span>
+                <ImageNotDraggable
+                  src={arrow}
+                  alt="arrow"
+                  className={styles.arrow}
                 />
-              </div>
-            )}
+              </PrimaryBtn>
+              {isOpenFilter && (
+                <div className={styles.filterContent} id="filter">
+                  <GamesSelect
+                    games={games}
+                    selectedGames={selectedGames}
+                    setSelectedGames={setSelectedGames}
+                  />
+                </div>
+              )}
+            </div>
+            <div className={styles.list}>
+              {offers?.length ? (
+                offers.map((offer: Offer) => (
+                  <ProfileOffer user={user} offer={offer} key={offer._id} />
+                ))
+              ) : (
+                <span className={styles.nullText}>Ничего не найдено</span>
+              )}
+            </div>
           </div>
-          <div className={styles.list}>
-            {offers?.length ? (
-              offers.map((offer: Offer) => (
-                <ProfileOffer user={user} offer={offer} key={offer._id} />
-              ))
-            ) : (
-              <span className={styles.nullText}>Ничего не найдено</span>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

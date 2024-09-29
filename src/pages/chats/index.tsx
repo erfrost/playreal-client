@@ -10,7 +10,7 @@ import { toastError } from "@/lib/toastifyActions";
 import { Message } from "@/models/Message.model";
 import { Socket, io } from "socket.io-client";
 import { NextRouter, useRouter } from "next/router";
-import { Files } from "lucide-react";
+import ChatsPageSEO from "@/SEO/ChatsPageSEO";
 
 interface OnlineStatusPayload {
   userId: string;
@@ -186,38 +186,45 @@ const Chats = () => {
   if (!userId || !socket) return null;
 
   return (
-    <div className={styles.container}>
-      <BreadcrumbNav
-        theme="dark"
-        routes={[
-          {
-            title: "Главная",
-            path: "/",
-          },
-          {
-            title: "Мои заказы",
-            path: "/profile",
-          },
-          {
-            title: "Чаты",
-            path: "/chats",
-          },
-        ]}
-      />
-      <div className={styles.content}>
-        <div className={styles.navbar}>
-          {chats?.map((chat: Chat) => (
-            <ChatItem key={chat._id} chat={chat} onSelectChat={onSelectChat} />
-          ))}
-        </div>
-        <ChatWindow
-          chat={currentChat}
-          currentChatMessages={currentChatMessages}
-          socket={socket}
-          userId={userId}
+    <>
+      <ChatsPageSEO />
+      <div className={styles.container}>
+        <BreadcrumbNav
+          theme="dark"
+          routes={[
+            {
+              title: "Главная",
+              path: "/",
+            },
+            {
+              title: "Мои заказы",
+              path: "/profile",
+            },
+            {
+              title: "Чаты",
+              path: "/chats",
+            },
+          ]}
         />
+        <div className={styles.content}>
+          <div className={styles.navbar}>
+            {chats?.map((chat: Chat) => (
+              <ChatItem
+                key={chat._id}
+                chat={chat}
+                onSelectChat={onSelectChat}
+              />
+            ))}
+          </div>
+          <ChatWindow
+            chat={currentChat}
+            currentChatMessages={currentChatMessages}
+            socket={socket}
+            userId={userId}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

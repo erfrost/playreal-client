@@ -3,9 +3,11 @@ import { CartItem } from "@/models/CartItem.model";
 import { AxiosResponse } from "axios";
 import axiosInstance from "axios.config";
 
-const payment = async (cartItems: CartItem[]) => {
+const payment = async (cartItems: CartItem[], method: "stripe" | "paypal") => {
   try {
-    const res: AxiosResponse = await axiosInstance.post("payment", {
+    const url: string = "payment/" + method;
+
+    const res: AxiosResponse = await axiosInstance.post(url, {
       items: cartItems,
     });
 

@@ -7,14 +7,23 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { supportIsOpenState } from "@/storage/atoms";
 import PrimaryBtn from "@/components/PrimaryBtn";
+import { Socket, io } from "socket.io-client";
+import getUserId from "@/api/users/getUserId";
+import { toastError } from "@/lib/toastifyActions";
+import { SupportMessage } from "@/models/SupportMessage.model";
+import getSupportMessages from "@/api/supportChat/getSupportMessages";
 
 const Support = () => {
-  const [messages, setMessages] = useState<any[]>([]);
+  const [userId, setUserId] = useState<string | undefined>(undefined);
+  const [messages, setMessages] = useState<SupportMessage[]>([]);
   const [text, setText] = useState<string>("");
   const [isOpen, setIsOpen] = useRecoilState<boolean>(supportIsOpenState);
   const [screenWidth, setScreenWidth] = useState<number>(1920);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
@@ -29,7 +38,7 @@ const Support = () => {
         window.removeEventListener("resize", handleResize);
       }
     };
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen || screenWidth < 1000) return;
@@ -41,6 +50,71 @@ const Support = () => {
 
     input.focus();
   }, [isOpen]);
+
+  useEffect(() => {
+    (async () => {
+      setMessages(await getSupportMessages());
+    })();
+  }, []);
+
+  useEffect(() => {
+    const messagesContainer: HTMLDivElement | null = document.querySelector(
+      ".Support_list__8zfKD"
+    );
+    if (!messagesContainer) return;
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }, [messages]);
+
+  useEffect(() => {
+    (async () => {
+      const userId: string = await getUserId();
+      setUserId(userId);
+
+      setSocket(io(`${process.env.BASE_SOCKET_URL}/support?userId=${userId}`));
+    })();
+  }, []);
+
+  const onAddMessage = (message: SupportMessage) => {
+    setMessages((prevState: SupportMessage[]) => [...prevState, message]);
+  };
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("connect", () => console.log("connect"));
+    socket.on("disconnect", () => console.log("disconnect"));
+    socket.on("error", (error: string) => toastError(error));
+    socket.on("message", (message: SupportMessage) => onAddMessage(message));
+
+    return () => {
+      socket.off("connect", () => console.log("connect"));
+      socket.off("disconnect", () => console.log("disconnect"));
+      socket.off("error", (error: string) => toastError(error));
+      socket.off("message", (message: SupportMessage) => onAddMessage(message));
+    };
+  }, [socket]);
+
+  const onEnterDown = (e: KeyboardEvent) => {
+    console.log(e.key);
+    if (e.key === "Enter") sendMessage();
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.addEventListener("keydown", onEnterDown);
+
+    return () => document.removeEventListener("keydown", onEnterDown);
+  }, [text, socket, isOpen]);
+
+  const sendMessage = () => {
+    if (!socket || !isOpen || !text) return;
+
+    socket.emit("message", text);
+
+    setText("");
+  };
 
   return (
     <div className={styles.container}>
@@ -60,7 +134,20 @@ const Support = () => {
           <ImageNotDraggable src={logo} alt="logo" className={styles.logo} />
         </div>
         <div className={styles.chatArea}>
-          {!messages.length && (
+          {messages.length ? (
+            <div className={styles.list}>
+              {messages.map((message: SupportMessage) => (
+                <div
+                  className={`${styles.message} ${
+                    message.senderId === userId ? styles.right : styles.left
+                  }`}
+                  key={message._id}
+                >
+                  <span className={styles.messageText}>{message.text}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
             <div className={styles.greeting}>
               <span className={styles.greetingBold}>HI!</span>
               <span className={styles.greetingSmall}>
@@ -82,7 +169,7 @@ const Support = () => {
               setText(e.target.value)
             }
           />
-          <button className={styles.sendBtn} onClick={() => setText("")}>
+          <button className={styles.sendBtn} onClick={sendMessage}>
             <ImageNotDraggable
               src={sendIcon}
               alt="sendIcon"

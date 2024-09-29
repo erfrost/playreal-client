@@ -12,7 +12,7 @@ import { useRecoilState } from "recoil";
 import { cartState } from "@/storage/atoms";
 import getCartItemPrice from "@/api/services/getCartItemPrice";
 import { CartItem, CartItemWithPrice } from "@/models/CartItem.model";
-import { toastError, toastSuccess, toastWarning } from "@/lib/toastifyActions";
+import { toastError, toastWarning } from "@/lib/toastifyActions";
 import payment from "@/api/payment/payment";
 import { deleteCookie } from "cookies-next";
 import { NextRouter, useRouter } from "next/router";
@@ -72,16 +72,34 @@ const CartButtonWithSlider = () => {
     };
   }, [isCartOpen]);
 
-  const onCreateOffer = async () => {
+  const onPayment = async (method: "stripe" | "paypal") => {
     if (!cart.length) return toastWarning("Корзина пуста");
 
-    const paymentUrl: string = await payment(cart);
+    const paymentUrl: string = await payment(cart, method);
     if (!paymentUrl) return toastError("Произошла ошибка при оплате");
 
-    setCart([]);
-    deleteCookie("cart");
+    // setCart([]);
+    // deleteCookie("cart");
 
-    router.push(paymentUrl);
+    // router.push(paymentUrl);
+  };
+
+  const onCheckout = () => {
+    const paymentsBtn: NodeListOf<HTMLButtonElement> | null =
+      document.querySelectorAll(".CartButtonWithSlider_paymentBtn__1Zfa0");
+    const checkoutBtn: HTMLButtonElement | null = document.querySelector(
+      ".CartButtonWithSlider_submitBtn__jBgFf"
+    );
+    if (!paymentsBtn || !checkoutBtn) return;
+
+    checkoutBtn.style.opacity = "0";
+    setTimeout(() => (checkoutBtn.style.display = "none"), 300);
+    setTimeout(() => {
+      paymentsBtn.forEach((btn: HTMLButtonElement) => {
+        btn.style.display = "block";
+        setTimeout(() => (btn.style.opacity = "1"), 100);
+      });
+    }, 300);
   };
 
   return (
@@ -124,12 +142,23 @@ const CartButtonWithSlider = () => {
                       : "Загрузка..."}
                   </h2>
                 </div>
-                <PrimaryBtn
-                  className={styles.submitBtn}
-                  onClick={onCreateOffer}
-                >
-                  Checkout
-                </PrimaryBtn>
+                <div className={styles.submitBtnGroup}>
+                  <PrimaryBtn
+                    className={styles.paymentBtn}
+                    onClick={() => onPayment("stripe")}
+                  >
+                    Оплатить через Stripe
+                  </PrimaryBtn>
+                  <PrimaryBtn
+                    className={styles.paymentBtn}
+                    onClick={() => onPayment("paypal")}
+                  >
+                    Оплатить через Paypal
+                  </PrimaryBtn>
+                  <PrimaryBtn className={styles.submitBtn} onClick={onCheckout}>
+                    Checkout
+                  </PrimaryBtn>
+                </div>
               </div>
             </CartOverlay>
           </>

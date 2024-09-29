@@ -59,6 +59,50 @@
   position: relative;
   padding: 0 15px;
 }
+.list {
+  width: calc(100% - 30px);
+  max-height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+.message {
+  max-width: 80%;
+  flex-shrink: 0;
+  padding: 5px 13px;
+  border-radius: 10px;
+}
+.message:first-child {
+  margin-top: 15px;
+}
+.message:last-child {
+  margin-bottom: 15px;
+}
+.left {
+  align-self: flex-start;
+}
+.left {
+  background-color: #f5f5f5;
+}
+.right {
+  align-self: flex-end;
+  background-color: #efccff;
+}
+.messageText {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1px;
+  letter-spacing: 0.5px;
+}
 .greeting {
   width: 0;
   position: absolute;
@@ -126,13 +170,7 @@
 
 @media screen and (max-width: 825px) {
   .container {
-    bottom: 10px;
     right: 10px;
-  }
-}
-@media screen and (max-width: 800px) {
-  .container {
-    bottom: 50px;
   }
 }
 @media screen and (max-width: 600px) {

@@ -50,8 +50,25 @@
   line-height: 46.01px;
   font-weight: 700;
 }
+.submitBtnGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding: 0 1.75rem;
+}
+.paymentBtn {
+  flex-grow: 1;
+  padding: 1rem;
+  border-radius: 30px;
+  margin-bottom: 1.75rem;
+  font-weight: 600;
+  opacity: 0;
+  display: none;
+  transition: all 0.3s ease;
+}
 .submitBtn {
-  width: calc(100% - 3.5rem);
+  width: 100%;
   margin-bottom: 1.75rem;
   padding: 1rem !important;
   font-weight: 700;
@@ -59,6 +76,7 @@
   background: #d681ff;
   border-radius: 50px !important;
   align-self: center;
+  transition: all 0.3s ease;
 }
 .closeIcon {
   display: none;

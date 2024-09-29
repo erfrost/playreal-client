@@ -22,7 +22,7 @@ const VoiceInput = () => {
     (async () => {
       const userId: string = await getUserId();
 
-      setSocket(io(`${process.env.BASE_SOCKET_URL}?userId=${userId}`));
+      setSocket(io(`${process.env.BASE_SOCKET_URL}/chat?userId=${userId}`));
     })();
   }, []);
 

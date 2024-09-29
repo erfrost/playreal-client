@@ -77,7 +77,7 @@ const WalletTable = ({ payments }: WalletTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {payments.map((payment: Payment) => (
+        {payments.reverse().map((payment: Payment) => (
           <tr key={payment._id}>
             <td className={styles.name}>
               <span
@@ -85,12 +85,13 @@ const WalletTable = ({ payments }: WalletTableProps) => {
                 onMouseOver={() => onMouseOver(payment._id)}
                 onMouseLeave={() => onMouseLeave(payment._id)}
               >
-                {payment.name ||
-                  payment.items
-                    ?.map((item: PaymentItem) => item.name)
-                    .join(", ")
-                    .slice(0, 20) +
-                    (payment.items!.join(", ").length > 20 ? "..." : "")}
+                {payment.items?.length
+                  ? payment.items
+                      ?.map((item: PaymentItem) => item.name)
+                      .join(", ")
+                      .slice(0, 20) +
+                    (payment.items!.join(", ").length > 20 ? "..." : "")
+                  : "Вывод средств"}
               </span>
               <div className={styles.tooltip} id={`tooltip-${payment._id}`}>
                 <ul>

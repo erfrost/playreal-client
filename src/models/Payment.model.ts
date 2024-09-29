@@ -13,10 +13,11 @@ export interface Payment {
   _id: string;
   userId: string;
   amount: string;
+  address?: string;
   name?: string;
   type: "payment" | "withdrawal" | "receiving";
   items?: PaymentItem[];
-  status: "success" | "cancelled";
+  status: "success" | "pending" | "cancelled";
   createdAt: string;
   updatedAt: string;
   __v: number;

@@ -3,6 +3,7 @@ import getAllPayment from "@/api/payment/getAllPayments";
 import getBalance from "@/api/users/getBalance";
 import getRole from "@/api/users/getRole";
 import WalletTable from "@/components/WalletTable";
+import WalletWithdrawal from "@/components/WalletWithdrawal";
 import { Payment } from "@/models/Payment.model";
 import styles from "@/styles/wallet.module.css";
 import { Wallet as WalletIcon } from "lucide-react";
@@ -12,6 +13,7 @@ const Wallet = () => {
   const [balance, setBalance] = useState<number | undefined>(undefined);
   const [payments, setPayments] = useState<Payment[]>([]);
   const [role, setRole] = useState<string | undefined>(undefined);
+  const [isOpenWithdrawal, setIsOpenWithdrawal] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -37,13 +39,21 @@ const Wallet = () => {
                 <span className={styles.balanceValue}>
                   {balance ? balance.toLocaleString() : "0"} ₽
                 </span>
-                <button className={styles.btn}>Вывести</button>
+                <button
+                  className={styles.btn}
+                  onClick={() => setIsOpenWithdrawal(true)}
+                >
+                  Вывести
+                </button>
               </div>
             </div>
           )}
           <span className={styles.tableTitle}>История операций</span>
           <WalletTable payments={payments} />
         </div>
+        {isOpenWithdrawal && (
+          <WalletWithdrawal setIsOpen={setIsOpenWithdrawal} />
+        )}
       </div>
     </>
   );

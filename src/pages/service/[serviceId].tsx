@@ -111,7 +111,7 @@ const ServiceOffer = ({
             </div>
           </div>
           <OfferCalculator service={service} role={role} />
-          {role !== "user" && boosters?.length && (
+          {role !== "user" && boosters?.length ? (
             <div className={styles.footerBlock}>
               <h2 className={styles.h2}>Выберите бустера</h2>
               <span className={styles.boostersText}>
@@ -125,7 +125,7 @@ const ServiceOffer = ({
                 ))}
               </div>
             </div>
-          )}
+          ) : null}
           {additionalServices.length ? (
             <div className={styles.footerBlock}>
               <h2 className={styles.h2}>Вам может понравиться</h2>

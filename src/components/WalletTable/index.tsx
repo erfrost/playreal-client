@@ -77,7 +77,7 @@ const WalletTable = ({ payments }: WalletTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {payments.reverse().map((payment: Payment) => (
+        {payments.map((payment: Payment) => (
           <tr key={payment._id}>
             <td className={styles.name}>
               <span

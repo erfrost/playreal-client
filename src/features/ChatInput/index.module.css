@@ -4,3 +4,9 @@
   align-items: center;
   border-top: 1px solid #c2c2c2;
 }
+
+@media screen and (max-width: 725px) {
+  .container {
+    padding: 0 10px;
+  }
+}

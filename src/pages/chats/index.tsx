@@ -67,6 +67,7 @@ const Chats = () => {
     toastError(error);
   };
   const handleMessage = (message: Message) => {
+    console.log("message: ", message);
     if (
       currentChat &&
       message.chatId === currentChat._id &&
@@ -89,10 +90,6 @@ const Chats = () => {
           : message.files.length
           ? `Файлы: ${message.files.length} шт.`
           : "Ничего",
-        unreadMessagesCount:
-          currentChat?._id === arr[currentChatIndex]._id
-            ? arr[currentChatIndex].unreadMessagesCount
-            : (arr[currentChatIndex].unreadMessagesCount ?? 0) + 1,
       };
 
       arr[currentChatIndex] = updatedChat;
@@ -106,7 +103,7 @@ const Chats = () => {
       const currentChatIndex: number = arr.findIndex((chat: Chat) =>
         chat.users.includes(payload.userId)
       );
-
+      console.log("chat: ", currentChatIndex);
       if (currentChatIndex === -1) return prevState;
 
       const updatedChat: Chat = {
@@ -156,7 +153,6 @@ const Chats = () => {
 
       const updatedChat: Chat = {
         ...arr[currentChatIndex],
-        unreadMessagesCount: 0,
       };
 
       arr[currentChatIndex] = updatedChat;
@@ -179,7 +175,7 @@ const Chats = () => {
       socket.off("disconnect", handleDisconnect);
       socket.off("error", handleError);
       socket.off("message", handleMessage);
-      socket.on("onlineStatus", handleOnlineStatus);
+      socket.off("onlineStatus", handleOnlineStatus);
     };
   }, [socket, chats, currentChat]);
 
@@ -212,6 +208,7 @@ const Chats = () => {
               <ChatItem
                 key={chat._id}
                 chat={chat}
+                currentChatId={currentChat?._id}
                 onSelectChat={onSelectChat}
               />
             ))}

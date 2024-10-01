@@ -12,6 +12,11 @@
   align-items: flex-end;
   gap: 15px;
   overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.content::-webkit-scrollbar {
+  display: none;
 }
 .message {
   display: flex;

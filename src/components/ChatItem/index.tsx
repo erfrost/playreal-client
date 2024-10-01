@@ -3,15 +3,29 @@ import ImageNotDraggable from "../ui/ImageNotDraggable";
 import styles from "./index.module.css";
 import noAvatar from "/public/noAvatar.png";
 import { useEffect, useState } from "react";
+import getUnreadMessagesCount from "@/api/chats/getUnreadMessagesCount";
 
 interface ChatItemProps {
   chat: Chat;
+  currentChatId: string | undefined;
   onSelectChat: (chatId: string) => void;
 }
-const ChatItem = ({ chat, onSelectChat }: ChatItemProps) => {
+const ChatItem = ({ chat, currentChatId, onSelectChat }: ChatItemProps) => {
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState<number>(0);
   const [message, setMessage] = useState<string | null>(null);
   const [chatsCount, setChatsCount] = useState<number | undefined>(undefined);
   const user: ChatUser = chat.user;
+
+  useEffect(() => {
+    if (chat._id === currentChatId) setUnreadMessagesCount(0);
+  }, [currentChatId]);
+
+  useEffect(() => {
+    (async () => {
+      if (chat._id === currentChatId) return;
+      setUnreadMessagesCount(await getUnreadMessagesCount(chat._id));
+    })();
+  }, [chat]);
 
   useEffect(() => {
     if (!chat.lastMessage) setMessage(null);
@@ -33,7 +47,7 @@ const ChatItem = ({ chat, onSelectChat }: ChatItemProps) => {
     <div
       className={`${styles.container} ${
         chatsCount === 1 && styles.oneContainer
-      }`}
+      } ${chat._id === currentChatId && styles.currentChatContainer}`}
       onClick={() => onSelectChat(chat._id)}
     >
       <div className={styles.avatarContainer}>
@@ -46,8 +60,8 @@ const ChatItem = ({ chat, onSelectChat }: ChatItemProps) => {
             chat.user.onlineStatus && styles.online
           }`}
         />
-        {chat.unreadMessagesCount ? (
-          <div className={styles.count}>{chat.unreadMessagesCount}</div>
+        {unreadMessagesCount ? (
+          <div className={styles.count}>{unreadMessagesCount}</div>
         ) : null}
       </div>
       <div className={styles.content}>

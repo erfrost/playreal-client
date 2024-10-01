@@ -10,7 +10,6 @@ export interface Chat {
   users: string[];
   user: ChatUser;
   lastMessage?: string;
-  unreadMessagesCount: number;
   createdAt: string;
   updatedAt: string;
   __v: number;

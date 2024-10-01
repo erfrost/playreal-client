@@ -15,6 +15,24 @@ interface ChatAreaProps {
 }
 const ChatArea = ({ recipient, messages, isLoading }: ChatAreaProps) => {
   const [modalFile, setModalFile] = useState<string | null>(null);
+  const [screenWidth, setScreenWidth] = useState<number>(1920);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    if (typeof window !== "undefined") {
+      setScreenWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (modalFile) {
@@ -48,19 +66,25 @@ const ChatArea = ({ recipient, messages, isLoading }: ChatAreaProps) => {
     const messagesContainer: HTMLDivElement | null = document.querySelector(
       ".ChatArea_content__nL6XR"
     );
+    const navbar: HTMLDivElement | null = document.querySelector(
+      ".chats_navbar__IAFWe"
+    );
+
     if (
       !chatWindow ||
       !chatArea ||
       !chatHeader ||
       !chatInputs ||
-      !messagesContainer
+      !messagesContainer ||
+      !navbar
     )
       return;
-
+    console.log(chatInputs.clientHeight, chatInputs.offsetHeight);
     chatArea.style.maxHeight =
-      chatWindow.clientHeight -
-      chatHeader.clientHeight -
-      chatInputs.clientHeight +
+      chatWindow.offsetHeight -
+      chatHeader.offsetHeight -
+      chatInputs.offsetHeight -
+      (screenWidth < 725 ? navbar.offsetHeight : 0) +
       "px";
 
     const areaHeight: number = chatArea.clientHeight;

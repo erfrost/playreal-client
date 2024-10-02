@@ -17,17 +17,17 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           PASSWORD: ${{ secrets.SSH_PASSWORD }}
         with:
-          host: 147.45.168.75
+          host: 147.79.75.3
           username: root
           port: 22
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            if [ ! -d "/root/сlient" ]; then 
-              echo "Directory /root/client does not exist. Cloning repository..."
-              git clone https://github.com/erfrost/playreal-client.git /root/client 
+            if [ ! -d "client" ]; then 
+              echo "Directory "client" does not exist. Cloning repository..."
+              git clone https://github.com/erfrost/playreal-client.git client
             fi
 
-            cd /root/client && git pull origin main &&
+            cd client && git pull origin main &&
 
             CONTAINER_ID=$(docker ps -q --filter "name=client") &&
 
@@ -45,5 +45,5 @@ jobs:
             echo "Running new Docker container..." &&
             docker run -d --name client -p 3000:3000 client &&  
 
-             echo "Cleaning up dangling images..." &&
-             docker image prune --filter="dangling=true" -f
+            echo "Cleaning up dangling images..." &&
+            docker image prune --filter="dangling=true" -f

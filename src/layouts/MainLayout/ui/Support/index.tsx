@@ -71,7 +71,9 @@ const Support = () => {
       const userId: string = await getUserId();
       setUserId(userId);
 
-      setSocket(io(`${process.env.BASE_SOCKET_URL}/support?userId=${userId}`));
+      setSocket(
+        io(`${process.env.BASE_SOCKET_URL}/support?userId=${userId || ""}`)
+      );
     })();
   }, []);
 

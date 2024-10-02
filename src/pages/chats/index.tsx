@@ -34,7 +34,9 @@ const Chats = () => {
       if (!userId) {
         return toastError("При загрузке чатов произошла ошибка");
       }
-      setSocket(io(`${process.env.BASE_SOCKET_URL}/chat?userId=${userId}`));
+      setSocket(
+        io(`${process.env.BASE_SOCKET_URL}/chat?userId=${userId || ""}`)
+      );
 
       const chats: Chat[] = await getChats();
       if (!chats) return;
